@@ -18,7 +18,7 @@ export default {
           contacts: [{
             label: 'Work email',
             type: 'email',
-            value: 'john@len.on'
+            value: 'john@len.non'
           }, {
             label: 'Work phone',
             type: 'phone',

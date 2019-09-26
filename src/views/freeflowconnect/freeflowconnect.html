@@ -26,15 +26,20 @@
     </v-flex>
     <v-flex v-if="selectedRoom" class="py-2 px-4">
       <v-card>
-        <v-card-title class="primary white--text">
-          <v-avatar size="8" color="secondary darken-2 " class="mr-3">
-          </v-avatar>
-          {{selectedRoom.name}}
-          <v-spacer />
-          <v-btn dark small icon @click="expanded = !expanded">
-            <v-icon small v-if="!expanded">fas fa-expand</v-icon>
-            <v-icon small v-else>fas fa-compress</v-icon>
-          </v-btn>
+        <v-card-title class="primary white--text py-2">
+          <v-row align="center" class="px-2">
+
+            <v-avatar size="8" color="secondary darken-2 " class="mr-3">
+            </v-avatar>
+            <span  class="text-uppercase">
+              {{selectedRoom.name}}
+            </span>
+            <v-spacer />
+            <v-btn dark small icon @click="expanded = !expanded">
+              <v-icon small v-if="!expanded">fas fa-expand</v-icon>
+              <v-icon small v-else>fas fa-compress</v-icon>
+            </v-btn>
+          </v-row>
           </v-toolbar>
         </v-card-title>
         <v-card-text class="py-2">

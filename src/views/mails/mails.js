@@ -22,6 +22,7 @@ export default {
         {
           hash: 'abc123',
           from: 'John Lennon',
+          extraFrom: 'john@len.non',
           star: false,
           subject: 'All my troubles seemed so far away',
           // body: 'hoi<img src="#" onerror=alert("hoi") />',
