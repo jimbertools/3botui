@@ -1,0 +1,59 @@
+<section class="appstore">
+  <v-btn fixed bottom right class="secondary" fab @click="showDialog = true">
+    <v-icon>fas fa-plus</v-icon>
+  </v-btn>
+  <v-col>
+    <h2 class="headline">AD Apps</h2>
+    <v-row wrap>
+      <v-flex v-for="(app, i) in apps" :key="i" xs3 class="pa-2">
+        <v-card @click="">
+          <v-sheet class="primary py-5">
+            <v-row class="fill-height" align="center" justify="center">
+              <div class="display-1 white--text py-5">{{app.name}}</div>
+            </v-row>
+          </v-sheet>
+          <v-card-title>{{app.name}}</v-card-title>
+          <v-card-text>
+            Description
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-row>
+    <v-divider class="my-5"></v-divider>
+    <h2 class="headline mt-5">Services</h2>
+    <v-row wrap>
+        <v-flex v-for="(app, i) in services" :key="i" xs3 class="pa-2">
+          <v-card @click="">
+            <v-sheet class="primary py-5">
+              <v-row class="fill-height" align="center" justify="center">
+                <div class="display-1 white--text py-5">{{app.name}}</div>
+              </v-row>
+            </v-sheet>
+            <v-card-title>{{app.name}}</v-card-title>
+            <v-card-text>
+              Description
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-row>
+  </v-col>
+  <v-dialog v-model="showDialog" max-width="600px" scrollable>
+      <v-card>
+        <v-toolbar color="primary" class="mb-3 text-uppercase" dark>
+          <v-card-title>Upload Flisk</v-card-title>
+          <v-spacer />
+          <v-btn icon class="mr-0" @click="showDialog = false">
+            <v-icon>fas fa-times</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>
+          <!-- <blockInfo :value="block" /> -->
+        </v-card-text>
+  
+        <v-card-actions>
+          <div class="flex-grow-1"></div>
+          <v-btn text @click="showDialog=false">Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+</section>

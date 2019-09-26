@@ -1,0 +1,91 @@
+<section class="freeflowconnect">
+  <v-row>
+    <v-flex md2 v-if="!expanded">
+      <div class="text-xs-center pa-5 pr-0">
+        <v-btn block color="success" @click="$emit('click:create')">
+          <v-icon small left>
+            fas fa-plus
+          </v-icon>
+          Create room
+        </v-btn>
+      </div>
+      <v-navigation-drawer permanent class="transparent elevation-0">
+        <v-list dense class="pl-2">
+          <v-list-item link v-for="(room, index) in rooms" :key="index" @click="selectedRoom = room">
+            <v-list-item-icon>
+              <v-avatar color="primary">
+                <v-icon dark>fas fa-users</v-icon>
+              </v-avatar>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="text-capitalize">{{room.name}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+    </v-flex>
+    <v-flex v-if="selectedRoom" class="py-2 px-4">
+      <v-card>
+        <v-card-title class="primary white--text">
+          <v-avatar size="8" color="secondary darken-2 " class="mr-3">
+          </v-avatar>
+          {{selectedRoom.name}}
+          <v-spacer />
+          <v-btn dark small icon @click="expanded = !expanded">
+            <v-icon small v-if="!expanded">fas fa-expand</v-icon>
+            <v-icon small v-else>fas fa-compress</v-icon>
+          </v-btn>
+          </v-toolbar>
+        </v-card-title>
+        <v-card-text class="py-2">
+          <v-row wrap>
+            <v-flex md4 class="pa-1" v-for="(participant, index) in participants" :key="index" >
+              <v-card style="width:100%;">
+                <v-card-title class="primary white--text">
+                  {{participant.name}}
+                  <v-spacer />
+                  <v-btn dark small icon>
+                    <v-icon small>fas fa-video-slash</v-icon>
+                  </v-btn>
+                  <v-btn dark small icon>
+                    <v-icon small>fas fa-microphone-slash</v-icon>
+                  </v-btn>
+                </v-card-title>
+                <v-row align="center" class="text-center py-5 primary lighten-4 red" style="min-height: 300px;">
+                  <v-flex>
+                    <v-icon>
+                      fas fa-video
+                    </v-icon>
+                  </v-flex>
+                </v-row>
+              </v-card>
+            </v-flex>
+          </v-row>
+        </v-card-text>
+      </v-card>
+      <!-- <v-card>
+        <v-card-title class="primary white--text">
+          <v-avatar size="8" color="secondary darken-2 " class="mr-3">
+          </v-avatar>
+          Room 1
+          </v-toolbar>
+        </v-card-title>
+        <v-card-text>
+          <v-col justify-end>
+            <v-row class="mx-2" :justify-end="j % 2" v-for="j in 50" :key="j">
+              <v-row :class="`full-round grey lighten-4 my-2 ${j%2? 'ml-5':'mr-5'}`">
+                <v-flex :class="j%2? 'text-right':''">
+                  <p class="ma-2">hi</p>
+                </v-flex>
+              </v-row>
+            </v-row>
+          </v-col>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="success">text</v-btn>
+        </v-card-actions>
+      </v-card> -->
+    </v-flex>
+  </v-row>
+
+</section>
