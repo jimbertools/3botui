@@ -8,19 +8,19 @@ export default {
     return {
       showDialog: false,
       apps: []
-     
+
     }
   },
   computed: {
 
   },
   mutations: {
-    
+
   },
   mounted () {
     apiService.getApps().then(response => {
       console.log(response.data)
-      console.log("yay")
+      console.log('yay')
       this.apps = response.data
     })
   },
@@ -30,8 +30,8 @@ export default {
       apiService.installApp(app.name).then(response => {
         console.log(app.name)
         console.log(response.data)
-        console.log("Install")
-        if(response.status == 200) {
+        console.log('Install')
+        if (response.status === 200) {
           app.installed = true
         }
       })
@@ -41,8 +41,8 @@ export default {
       apiService.uninstallApp(app.name).then(response => {
         console.log(app.name)
         console.log(response.data)
-        console.log("uninstall")
-        if(response.status == 200) {
+        console.log('uninstall')
+        if (response.status === 200) {
           app.installed = false
         }
       })
