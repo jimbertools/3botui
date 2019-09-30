@@ -8,16 +8,7 @@ export default {
     return {
       showDialog: false,
       apps: []
-      // services: [{
-      //   name: '3Bot',
-      //   installed: false
-      // }, {
-      //   name: 'Wordpress',
-      //   installed: false
-      // }, {
-      //   name: 'Ubuntu',
-      //   installed: false
-      // }]
+     
     }
   },
   computed: {
@@ -35,18 +26,22 @@ export default {
   },
   methods: {
     installApp (app) {
-      apiService.installApp(app.appname).then(response => {
+      console.log(app)
+      apiService.installApp(app.name).then(response => {
+        console.log(app.name)
         console.log(response.data)
-        console.log("Install or uninstall")
+        console.log("Install")
         if(response.status == 200) {
           app.installed = true
         }
       })
     },
     uninstallApp (app) {
-      apiService.uninstallApp(app.appname).then(response => {
+      console.log(app)
+      apiService.uninstallApp(app.name).then(response => {
+        console.log(app.name)
         console.log(response.data)
-        console.log("Install or uninstall")
+        console.log("uninstall")
         if(response.status == 200) {
           app.installed = false
         }

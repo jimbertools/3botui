@@ -9,7 +9,8 @@ export default ({
       return Axios.post(`${config.jsApiUrl}apps/update`,
       {
           "args" : {
-            appname : true
+            "name" : appname,
+            "installed" : true
           }
       })
     },
@@ -17,7 +18,8 @@ export default ({
         return Axios.post(`${config.jsApiUrl}apps/update`, 
         {
           "args" : {
-            appname : true
+            "name" : appname,
+            "installed" : false
           }
         })
       },
