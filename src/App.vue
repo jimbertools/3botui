@@ -77,12 +77,12 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   components: {},
   data: () => ({
     showDialog: false,
-    dilogTitle: "title",
-    dialogBody: "",
+    dilogTitle: 'title',
+    dialogBody: '',
     dialogActions: [],
     dialogImage: null,
     block: null,
@@ -90,12 +90,12 @@ export default {
     menu: false
   }),
   computed: {
-    routes() {
-      return this.$router.options.routes;
+    routes () {
+      return this.$router.options.routes
     }
   },
-  mounted() {}
-};
+  mounted () {}
+}
 </script>
 
 <style lang="scss">
