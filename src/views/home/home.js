@@ -8,7 +8,9 @@ export default {
     }
   },
   computed: {
-
+    routes () {
+      return this.$router.options.routes
+    }
   },
   mounted () {
 
