@@ -1,7 +1,8 @@
+import '@fortawesome/fontawesome-pro/css/all.min.css'
+import '@fortawesome/fontawesome-pro/css/duotone.min.css'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/src/styles/main.sass'
-import '@fortawesome/fontawesome-free/css/all.css'
 Vue.use(Vuetify)
 
 export default new Vuetify({

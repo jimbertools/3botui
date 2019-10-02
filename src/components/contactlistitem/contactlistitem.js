@@ -8,7 +8,7 @@ export default {
     }
   },
   computed: {
-
+    name () { return `${this.contact.firstname} ${this.contact.lastname}` }
   },
   mounted () {
 

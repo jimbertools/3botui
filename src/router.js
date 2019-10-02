@@ -54,6 +54,25 @@ export default new Router({
         displayName: 'FreeFlow Connect'
       }
     }, {
+      path: '/browser',
+      name: 'browser',
+      component: () => import(/* webpackChunkName: "browser-page" */ './views/browser'),
+      meta: {
+        icon: 'far fa-globe-europe',
+        position: 'top',
+        displayName: 'Browser'
+      }
+    }, {
+      path: '/freeflowconnect/:roomName',
+      name: 'connectWithRoom',
+      component: () => import(/* webpackChunkName: "freeflowconnect-page" */ './views/freeflowconnect'),
+      meta: {
+        icon: 'fas fa-comments',
+        position: 'top',
+        displayName: 'FreeFlow Connect',
+        hide: true
+      }
+    }, {
       path: '/appstore',
       name: 'dapps',
       component: () => import(/* webpackChunkName: "appstore-page" */ './views/appstore'),

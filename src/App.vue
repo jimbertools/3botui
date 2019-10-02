@@ -17,7 +17,7 @@
         </div>
         <div>
           <v-list-item
-            v-for="(route, i) in routes.filter(r => r.meta.position == 'top')"
+            v-for="(route, i) in routes.filter(r => r.meta.position == 'top' && !r.meta.hide)"
             :key="i"
             :to="route"
             active-class="secondary--text"
@@ -33,7 +33,7 @@
         <v-spacer></v-spacer>
         <div>
           <v-list-item
-            v-for="(route, i) in routes.filter(r => r.meta.position == 'bottom')"
+            v-for="(route, i) in routes.filter(r => r.meta.position == 'bottom' && !r.meta.hide)"
             :key="i"
             :to="route"
             active-class="secondary--text"
@@ -81,11 +81,6 @@ export default {
   components: {},
   data: () => ({
     showDialog: false,
-    dilogTitle: "title",
-    dialogBody: "",
-    dialogActions: [],
-    dialogImage: null,
-    block: null,
     showBadge: true,
     menu: false
   }),
@@ -99,7 +94,8 @@ export default {
 </script>
 
 <style lang="scss">
-body, .content {
+body,
+.content {
   background: #fafafa !important;
 }
 .topround {
@@ -107,7 +103,7 @@ body, .content {
 }
 .full-round {
   border-radius: 10px !important;
-  overflow:hidden;
+  overflow: hidden;
 }
 .rounded {
   border-radius: 0 10px 10px 0 !important;

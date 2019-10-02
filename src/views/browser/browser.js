@@ -1,5 +1,5 @@
 export default {
-  name: 'home',
+  name: 'browser',
   components: {},
   props: [],
   data () {
@@ -8,9 +8,7 @@ export default {
     }
   },
   computed: {
-    routes () {
-      return this.$router.options.routes
-    }
+
   },
   mounted () {
 

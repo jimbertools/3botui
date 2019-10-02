@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import exampleStore from './exampleStore'
+import appStore from './appStore'
+import contactStore from './contactStore'
+import ffcStore from './ffcStore'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    exampleStore
+    appStore,
+    contactStore,
+    ffcStore
   }
 })

@@ -26,8 +26,8 @@
                 <div style="position: absolute; height:100%; width: 100%;" class="pa-3">
                   <v-list two-line>
                     <v-list-item-group>
-                      <template v-for="(index) in 100">
-                        <contact-list-item :contact="item" :key="index" @click="openContact = item" />
+                      <template v-for="(contact, index) in contacts">
+                        <contact-list-item :contact="contact" :key="index" @click="openContact = contact" />
                         <v-divider></v-divider>
                       </template>
                     </v-list-item-group>
@@ -38,11 +38,20 @@
               <v-divider vertical></v-divider>
             </v-flex>
             <v-flex md8>
-              <full-contact :contact="openContact" v-if="openContact" />
+              <full-contact :key="openContact.id" :contact="openContact" v-if="openContact" />
             </v-flex>
           </v-row>
         </v-container>
       </v-card>
     </v-flex>
   </v-row>
+  <v-dialog v-model="addContactDialog" max-width="500px" @click:outside="cancelContactCreation">
+    <v-card>
+      <full-contact :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose">
+      </full-contact>
+    </v-card>
+  </v-dialog>
+  <v-btn fixed bottom right fab dark color="primary" @click="addContactDialog = true">
+    <v-icon>fas fa-plus</v-icon>
+  </v-btn>
 </section>
