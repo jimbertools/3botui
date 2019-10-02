@@ -1,14 +1,14 @@
 export default {
-  name: 'contactlistitem',
+  name: 'browser',
   components: {},
-  props: ['contact'],
+  props: [],
   data () {
     return {
 
     }
   },
   computed: {
-    name () { return `${this.contact.firstname} ${this.contact.lastname}` }
+
   },
   mounted () {
 

@@ -11,7 +11,7 @@
                 </div>
                 <v-sheet :height="75" class="transparent"></v-sheet>
                 <v-row align="center" justify="center">
-                    <div v-for="(route, i) in routes.filter(r => r.meta.position == 'top' && r.name != 'home')" :key="i"
+                    <div v-for="(route, i) in routes.filter(r => r.meta.position == 'top' && r.name != 'home' && !r.meta.hide)" :key="i"
                         class="text-center px-5">
                         <span @click="$router.push(route)" style="cursor: pointer">
                             <v-avatar size="50" class="ma-3 primary">

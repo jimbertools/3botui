@@ -1,49 +1,105 @@
 <section class="fullcontact">
   <v-col class="pt-0">
     <div style="position: absolute; right:10px; top: 10px;">
-      <v-btn dark icon>
-        <v-icon small>fas fa-star</v-icon>
-      </v-btn>
-      <v-btn dark icon>
-        <v-icon small>fas fa-pencil-alt</v-icon>
-      </v-btn>
-      <v-btn dark icon>
-        <v-icon small>fas fa-ellipsis-v</v-icon>
-      </v-btn>
+      <slot name="actions">
+        <v-btn v-if="edit" dark icon @click="updateContact">
+          <v-icon small>fas fa-save</v-icon>
+        </v-btn>
+        <v-btn v-if="edit" dark icon @click="cancelUpdate">
+          <v-icon small>fas fa-times</v-icon>
+        </v-btn>
+        <v-btn v-if="!edit" dark icon>
+          <v-icon small>fas fa-star</v-icon>
+        </v-btn>
+        <v-btn v-if="!edit" dark icon @click="edit = true">
+          <v-icon small>fas fa-pencil-alt</v-icon>
+        </v-btn>
+        <v-menu v-if="!edit">
+          <template v-slot:activator="{ on }">
+            <v-btn dark icon v-on="on">
+              <v-icon small>fas fa-ellipsis-v</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item @click="deleteContact(currentContact.id)">
+              <v-list-item-icon>
+                <v-icon>fas fa-trash</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Delete contact</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </slot>
     </div>
     <v-row class="primary pa-5" align="center">
-      <v-avatar size="100" color="secondary">
-        <v-icon size="50" dark>fas fa-user</v-icon>
+      <v-avatar v-if="edit" style="position: absolute; z-index: 2; background: rgba(0,0,0,0.5);" size="100">
+        <v-icon size="50" dark>fas fa-camera</v-icon>
+        <!-- <v-file-input accept="image/png, image/jpeg, image/bmp" placeholder=""
+          prepend-icon="fas fa-camera" ></v-file-input> -->
       </v-avatar>
-      <v-flex class="ml-4">
-        <h1 class="display-1 white--text ml-2"> {{contact.name}}</h1>
-        <div class="pt-2">
-          <v-chip class="mx-2">
-            Coworker
+      <v-avatar size="100" color="secondary">
+        <v-img v-if="currentContact.picture" :src="currentContact.picture"></v-img>
+        <v-icon v-else size="50" dark>fas fa-user</v-icon>
+      </v-avatar>
+      <v-flex class="pl-2">
+        <v-row class="px-4">
+          <v-text-field :disabled="!edit" dark v-model="currentContact.firstname" label="First name"></v-text-field>
+          <v-text-field :disabled="!edit" dark v-model="currentContact.lastname" label="Last name"></v-text-field>
+        </v-row>
+        <div v-if="currentContact.tags && currentContact.tags.length">
+          <v-chip v-for="(tag, index) in currentContact.tags" :key="index" class="mr-2 text-uppercase">
+            {{tag}}
           </v-chip>
         </div>
       </v-flex>
     </v-row>
 
     <v-col>
-      <h2>
+      <h2 class="font-weight-thin">
         Contact details
       </h2>
-      <v-row v-for="(cont, index) in contact.contacts" :key="index" class="mt-2">
+      <!-- <v-row>
+        <v-col cols="6">
+          <v-dialog ref="birthdateDialog" v-model="modal" :return-value.sync="currentContact.birthdate" persistent width="290px">
+            <template v-slot:activator="{ on }">
+              <v-text-field v-model="currentContact.birthdate" label="Birthdate" prepend-icon="fas fa-calendar" readonly v-on="on">
+              </v-text-field>
+            </template>
+            <v-date-picker v-model="currentContact.birthdate" scrollable>
+              <div class="flex-grow-1"></div>
+              <v-btn text color="primary" @click="birthdateDialog = false">Cancel</v-btn>
+              <v-btn text color="primary" @click="$refs.dialog.save(currentContact.birthdate)">OK</v-btn>
+            </v-date-picker>
+          </v-dialog>
+        </v-col>
+        <v-col cols="6">ble</v-col>
+      </v-row> -->
+      <v-row v-if="(currentContact.phone_numbers && currentContact.phone_numbers.length) || edit" class="px-2">
+        <v-col cols="1">
+          <p class="text-center py-4">
+            <v-icon>fas fa-phone</v-icon>
+          </p>
+        </v-col>
+        <v-col>
+          <v-text-field v-for="(number, index) in currentContact.phone_numbers" :key="index" :disabled="!edit"
+            :value="number" label="Phone number"></v-text-field>
+          <v-text-field :v-if="edit" label="Phone number"></v-text-field>
+        </v-col>
+      </v-row>
+      <!-- <v-row v-for="(cont, index) in currentContact.phone_numbers" :key="index" class="mt-2">
         <v-flex md1 class="text-center">
           <v-icon small v-if="cont.type == 'email'">fas fa-envelope</v-icon>
-          <v-icon small v-if="cont.type == 'phone'">fas fa-phone</v-icon>
           <v-icon small v-if="cont.type == 'location'">fas fa-map-marked</v-icon>
         </v-flex>
         <v-flex class="ml-3"><span class="font-weight-bold">{{cont.value}} </span> - {{cont.label}}</v-flex>
-      </v-row>
+      </v-row> -->
     </v-col>
-    <v-col class="pt-2">
+    <!-- <v-col class="pt-2" v-if="currentContact.recent && currentContact.recent.length">
       <h2>
         Recent contact
       </h2>
-      <v-row v-for="(cont, index) in contact.recent" :key="index" class="mt-2" align="center">
-        <v-flex md1 class="text-center">
+      <v-row v-for="(cont, index) in currentContact.recent" :key="index" class="mt-2" align="center">
+        <v-col cols="1" class="text-center">
           <v-badge overlap right bottom color="secondary">
             <span slot="badge">
               <v-icon dark small v-if="cont.direction == 'outgoing'">fas fa-angle-right</v-icon>
@@ -54,9 +110,9 @@
               <v-icon small dark v-if="cont.type == 'phone'">fas fa-phone</v-icon>
             </v-avatar>
           </v-badge>
-        </v-flex>
+        </v-col>
         <v-flex class="ml-3">{{cont.body}}</v-flex>
       </v-row>
-    </v-col>
+    </v-col> -->
   </v-col>
 </section>

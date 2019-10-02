@@ -1,4 +1,4 @@
-import apiService from '../../services/apiServices'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'appstore',
@@ -7,45 +7,25 @@ export default {
   data () {
     return {
       showDialog: false,
-      apps: []
-
+      selectedApp: null
     }
   },
   computed: {
-
+    ...mapGetters([
+      'apps'
+    ])
   },
   mutations: {
 
   },
   mounted () {
-    apiService.getApps().then(response => {
-      console.log(response.data)
-      console.log('yay')
-      this.apps = response.data
-    })
+    this.getApps()
   },
   methods: {
-    installApp (app) {
-      console.log(app)
-      apiService.installApp(app.name).then(response => {
-        console.log(app.name)
-        console.log(response.data)
-        console.log('Install')
-        if (response.status === 200) {
-          app.installed = true
-        }
-      })
-    },
-    uninstallApp (app) {
-      console.log(app)
-      apiService.uninstallApp(app.name).then(response => {
-        console.log(app.name)
-        console.log(response.data)
-        console.log('uninstall')
-        if (response.status === 200) {
-          app.installed = false
-        }
-      })
-    }
+    ...mapActions([
+      'installApp',
+      'getApps',
+      'uninstallApp'
+    ])
   }
 }

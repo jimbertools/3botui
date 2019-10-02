@@ -1,68 +1,36 @@
 <section class="appstore">
-  <!-- <v-btn fixed bottom right class="secondary" fab @click="showDialog = true">
-    <v-icon>fas fa-plus</v-icon>
-  </v-btn> -->
   <v-col>
-    <h2 class="headline">AD Apps</h2>
+    <h2 class="headline">AD Apps {{selectedApp}}</h2>
     <v-row wrap>
-      <v-flex v-for="(app, i) in apps" :key="i" xs3 class="pa-2">
-        <v-card>
+      <v-flex d-flex v-for="(app, i) in apps" :key="i" xs3 class="pa-2">
+        <v-card style="width: 100%;">
           <v-sheet class="primary py-5">
             <v-row class="fill-height" align="center" justify="center">
-              <div class="display-1 white--text py-5">{{app.name}}</div>
+              <div class="display-1 white--text py-5">{{app.appname}}</div>
             </v-row>
+            <v-btn icon text absolute top right @click="selectedApp = app"><v-icon class="white--text" v-if="app.installed">far fa-times</v-icon><v-icon class="white--text" v-else>fad fa-box-check</v-icon></v-btn>
           </v-sheet>
           <v-card-title>{{app.name}}</v-card-title>
           <v-card-text>
-            {{app.description}} 
+            {{app.description}}
           </v-card-text>
-          <v-card-action class="float-right pa-1">
-            <v-btn v-if="app.installed" @click="uninstallApp(app)" text>Uninstall</v-btn>
-            <v-btn v-else="app.installed" @click="installApp(app)" text>Install</v-btn>
-          </v-card-action>
         </v-card>
       </v-flex>
     </v-row>
-    <!-- <v-divider class="my-5"></v-divider>
-    <h2 class="headline mt-5">Services</h2>
-    <v-row wrap>
-      <v-flex v-for="(app, i) in services" :key="i" xs3 class="pa-2">
-        <v-card @click="">
-          <v-sheet class="primary py-5">
-            <v-row class="fill-height" align="center" justify="center">
-              <div class="display-1 white--text py-5">{{app.name}}</div>
-            </v-row>
-          </v-sheet>
-          <v-card-title>{{app.name}}</v-card-title>
-          <v-card-text>
-            Description
-          </v-card-text>
-          <v-card-actions>
-              <v-flex class="text-xs-right">
-                <v-btn text>Install</v-btn>
-              </v-flex>
-            </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-row> -->
   </v-col>
-  <!-- <v-dialog v-model="showDialog" max-width="600px" scrollable>
+  <v-dialog v-model="selectedApp" v-if="!!selectedApp" max-width="500px">
     <v-card>
-      <v-toolbar color="primary" class="mb-3 text-uppercase" dark>
-        <v-card-title>Upload Flisk</v-card-title>
-        <v-spacer />
-        <v-btn icon class="mr-0" @click="showDialog = false">
-          <v-icon>fas fa-times</v-icon>
-        </v-btn>
-      </v-toolbar>
+      <v-card-title primary-title>
+        Are you sure you want to <span v-if="selectedApp.installed">un</span>install {{selectedApp.name}}?
+      </v-card-title>
       <v-card-text>
-        <!-- <blockInfo :value="block" /> -->
-      <!-- </v-card-text>
-
+        
+      </v-card-text>
       <v-card-actions>
-        <div class="flex-grow-1"></div>
-        <v-btn text @click="showDialog=false">Ok</v-btn>
+          <div class="flex-grow-1"></div>
+          <v-btn text @click="selectedApp=false">Cancel</v-btn>
+          <v-btn text @click="selectedApp=false">Ok</v-btn>
       </v-card-actions>
     </v-card>
-  </v-dialog> -->
+  </v-dialog>
 </section>

@@ -3,10 +3,10 @@
   <v-list-item @click="$emit('click')">
     <template v-slot:default="{ active, toggle }">
       <v-list-item-content>
-        <v-list-item-title>{{contact.name}}</v-list-item-title>
-        <v-list-item-subtitle>
+        <v-list-item-title>{{name}}</v-list-item-title>
+        <!-- <v-list-item-subtitle>
           {{contact.email}}
-        </v-list-item-subtitle>
+        </v-list-item-subtitle> -->
       </v-list-item-content>
 
       <v-list-item-action>
