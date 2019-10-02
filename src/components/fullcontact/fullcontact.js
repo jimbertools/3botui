@@ -32,6 +32,7 @@ export default {
   },
   mounted () {
     this.currentContact = JSON.parse(JSON.stringify(this.contact))
+    this.edit = JSON.parse(JSON.stringify(this.editable))
   },
   methods: {
     ...mapActions([
@@ -41,10 +42,12 @@ export default {
     updateContact () {
       this.createContact(this.currentContact)
       this.edit = false
+      this.$emit('update')
     },
     cancelUpdate () {
       this.currentContact = JSON.parse(JSON.stringify(this.contact))
       this.edit = false
+      this.$emit('cancel')
     }
   }
 }

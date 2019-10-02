@@ -47,19 +47,8 @@
   </v-row>
   <v-dialog v-model="addContactDialog" max-width="500px" @click:outside="cancelContactCreation">
     <v-card>
-      <full-contact editable :contact="newContact">
-        <template v-slot:actions>
-          <v-btn icon @click="cancelContactCreation">
-            <v-icon class="white--text">fas fa-times</v-icon>
-          </v-btn>
-        </template>
+      <full-contact :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose">
       </full-contact>
-      <v-card-actions>
-          <div class="flex-grow-1"></div>
-        <v-btn text class="secondary" large @click="saveNewContact">
-          Save
-        </v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
   <v-btn fixed bottom right fab dark color="primary" @click="addContactDialog = true">

@@ -29,14 +29,9 @@ export default {
       'getContacts',
       'createContact'
     ]),
-    cancelContactCreation () {
+    clearAndClose () {
       this.newContact = {}
       this.addContactDialog = false
-    },
-    saveNewContact () {
-      this.addContactDialog = false
-      this.createContact(this.newContact)
-      this.newContact = {}
     }
   }
 }

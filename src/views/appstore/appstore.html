@@ -8,7 +8,7 @@
             <v-row class="fill-height" align="center" justify="center">
               <div class="display-1 white--text py-5">{{app.appname}}</div>
             </v-row>
-            <v-btn icon text absolute top right @click="selectedApp = app"><v-icon class="white--text" v-if="app.installed">far fa-times</v-icon><v-icon class="white--text" v-else>fad fa-box-check</v-icon></v-btn>
+            <v-btn icon text absolute top right @click="selectedApp = app"><v-icon class="white--text" v-if="app.installed">far fa-times</v-icon><v-icon class="white--text" v-else>fad fa-download</v-icon></v-btn>
           </v-sheet>
           <v-card-title>{{app.name}}</v-card-title>
           <v-card-text>
