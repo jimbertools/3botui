@@ -81,11 +81,6 @@ export default {
   components: {},
   data: () => ({
     showDialog: false,
-    dilogTitle: "title",
-    dialogBody: "",
-    dialogActions: [],
-    dialogImage: null,
-    block: null,
     showBadge: true,
     menu: false
   }),
