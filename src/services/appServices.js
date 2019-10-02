@@ -5,19 +5,19 @@ export default ({
   getApps () {
     return Axios.post(`${config.jsApiUrl}apps/get`)
   },
-  installApp (appName) {
-    return Axios.post(`${config.jsApiUrl}apps/update`, {
+  installApp (app) {
+    app.installed = true
+    return Axios.post(`${config.jsApiUrl}apps/put`, {
       args: {
-        name: appName,
-        installed: true
+        app
       }
     })
   },
-  uninstallApp (appName) {
-    return Axios.post(`${config.jsApiUrl}apps/update`, {
+  uninstallApp (app) {
+    app.installed = false
+    return Axios.post(`${config.jsApiUrl}apps/put`, {
       args: {
-        name: appName,
-        installed: false
+        app
       }
     })
   }

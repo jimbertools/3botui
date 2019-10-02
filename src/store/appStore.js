@@ -11,18 +11,18 @@ export default ({
         context.commit('setApps', response.data.apps)
       })
     },
-    installApp: (context, appName) => {
+    installApp: (context, app) => {
       context.dispatch('wait/start', 'installApp', { root: true })
-      appService.installApp(appName).then(response => {
+      appService.installApp(app).then(response => {
         context.dispatch('wait/end', 'installApp', { root: true })
-        context.commit('updateApp', { name: appName, installed: true })
+        context.dispatch('getApps')
       })
     },
-    uninstallApp: (context, appName) => {
-      appService.uninstallApp(appName).then(response => {
-        if (response.status === 200) {
-          context.commit('updateApp', { name: appName, installed: false })
-        }
+    uninstallApp: (context, app) => {
+      context.dispatch('wait/start', 'uninstallApp', { root: true })
+      appService.uninstallApp(app).then(response => {
+        context.dispatch('wait/end', 'uninstallApp', { root: true })
+        context.dispatch('getApps')
       })
     }
   },
@@ -38,7 +38,7 @@ export default ({
       var activeApps = []
       state.apps.forEach(app => {
         if (app.installed) {
-          var appRoute = routes.find(x => x.meta.appName === app.appName)
+          var appRoute = routes.find(x => x.meta.appName === app.appname)
           activeApps.push(appRoute)
         }
       })

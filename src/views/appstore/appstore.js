@@ -6,7 +6,6 @@ export default {
   props: [],
   data () {
     return {
-      showDialog: false,
       selectedApp: null
     }
   },
@@ -26,6 +25,16 @@ export default {
       'installApp',
       'getApps',
       'uninstallApp'
-    ])
+    ]),
+    closeDialog (save) {
+      if (save) {
+        if (this.selectedApp.installed) {
+          this.uninstallApp(this.selectedApp)
+        } else {
+          this.installApp(this.selectedApp)
+        }
+      }
+      this.selectedApp = null
+    }
   }
 }
