@@ -12,7 +12,9 @@ export default {
       showCreateRoomDialog: false,
       roomName: null,
       userName: null,
-      janus: null
+      janus: null,
+      muted: false,
+      published: false
     }
   },
   computed: {
@@ -84,6 +86,22 @@ export default {
     showUsers: function () {
       console.log('showUsers in room ', this.roomName)
       this.janus.showUsers(this.roomName)
+    },
+    toggleMute: function () {
+      console.log('Toggling microphone')
+
+      var isMuted = this.janus.toggleMute()
+      this.muted = isMuted
+    },
+    unpublish: function () {
+      console.log('Unpublishing feed')
+      this.janus.unpublishOwnFeed()
+      this.published = !this.published
+    },
+    publish: function () {
+      console.log('Publishing feed')
+      this.janus.publishOwnFeed(true)
+      this.published = !this.published
     }
   }
 }

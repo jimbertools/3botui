@@ -50,15 +50,25 @@
                   <span v-if="index == 0"><strong>{{user}}</strong></span>
                   <span v-else>{{user}}</span>
                   <v-spacer />
-                  <v-btn dark small icon>
-                    <v-icon small>fas fa-video-slash</v-icon>
-                  </v-btn>
-                  <v-btn dark small icon>
-                    <v-icon small>fas fa-microphone-slash</v-icon>
-                  </v-btn>
+
+                  <div v-if="index == 0">
+                    <v-btn v-if="!published" @click="unpublish" dark small icon>
+                      <v-icon small>fas fa-video</v-icon>
+                    </v-btn>
+                    <v-btn v-else @click="publish" dark small icon>
+                      <v-icon small>fas fa-video-slash</v-icon>
+                    </v-btn>
+  
+                    <v-btn v-if="!muted" @click="toggleMute" dark small icon>
+                      <v-icon small>fas fa-microphone</v-icon>
+                    </v-btn>
+                    <v-btn v-else @click="toggleMute" dark small icon>
+                      <v-icon small>fas fa-microphone-slash</v-icon>
+                    </v-btn>
+                  </div>
                 </v-card-title>
                 <v-card-text class="pa-0 ma-0">
-                  <video :id="'feed' + index" style="display: flex;width: 100%;border-radius: 0px 0px 10px 10px;"></video>
+                  <video :id="'feed' + index" style="display: flex;width: 100%;border-radius: 0px 0px 10px 10px;" controls="controls" autoplay="autoplay"></video>
                 </v-card-text>
               </v-card>
             </v-flex>

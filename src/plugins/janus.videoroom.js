@@ -149,6 +149,27 @@ class JimberJanusVideoRoom {
     })
   }
 
+  toggleMute () {
+    var muted = instance.sfutest.isAudioMuted()
+
+    if (muted) {
+      instance.sfutest.unmuteAudio()
+    } else {
+      instance.sfutest.muteAudio()
+    }
+
+    muted = instance.sfutest.isAudioMuted()
+    return muted
+  }
+
+  unpublishOwnFeed () {
+    var unpublish = { 'request': 'unpublish' }
+
+    instance.sfutest.send({
+      'message': unpublish
+    })
+  }
+
   init () {
     Janus.init({
       debug: 'all',
@@ -584,7 +605,7 @@ class JimberJanusVideoRoom {
         // Janus.log(' ::: Got a cleanup notification (remote feed ' + id + ') :::')
 
         console.log(remoteFeed)
-        document.getElementById('feed' + remoteFeed.rfindex).remove()
+        document.getElementById('feed' + remoteFeed.rfindex).srcObject = null
         remoteFeed.mystream = null
         // mystream = null;
         // document.getElementById('participant1').srcObject = null
