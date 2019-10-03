@@ -45,7 +45,7 @@
       </v-card>
     </v-flex>
   </v-row>
-  <v-dialog v-model="addContactDialog" max-width="500px" @click:outside="cancelContactCreation">
+  <v-dialog v-model="addContactDialog" max-width="900px" @click:outside="clearAndClose">
     <v-card>
       <full-contact :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose">
       </full-contact>
