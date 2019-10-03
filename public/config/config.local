@@ -4,5 +4,8 @@ export default ({
 
   apiUrl: 'http://192.168.2.62:3000',
   janus: 'http://192.168.2.62:8088/janus',
-  janusHTTPS: 'https://192.168.2.62:8089/janus'
+  janusHTTPS: 'https://192.168.2.62:8089/janus',
+
+  botFrontEnd: 'https://login.threefold.me/',
+  botBackend: 'https://login.threefold.me'
 })

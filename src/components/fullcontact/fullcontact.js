@@ -47,7 +47,6 @@ export default {
         return this.currentContact.salutation ? this.currentContact.salutation.split(',') : []
       },
       set (val) {
-        console.log(`val`, val)
         this.currentContact.salutation = val.join(',')
       }
     }
