@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
@@ -21,8 +21,6 @@ Vue.use(new VueSocketIO({
 }))
 
 router.beforeEach((to, from, next) => {
-  console.log('cHECK ME IVAN')
-  console.log('STORE', JSON.stringify(store.state))
   if ((to.name !== 'login' && to.name !== 'error') && !store.state.authStore.account) {
     next({
       name: 'login'

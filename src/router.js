@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/home'
@@ -14,8 +15,7 @@ export default new Router({
       component: Home,
       meta: {
         icon: 'fas fa-home',
-        position: 'top',
-        displayName: 'Mail'
+        position: 'top'
       }
     },
     {
@@ -33,7 +33,7 @@ export default new Router({
       meta: {
         icon: 'fas fa-envelope-open',
         position: 'top',
-        displayName: 'Mail'
+        appName: 'Mail'
       }
     }, {
       path: '/calendar',
@@ -42,7 +42,7 @@ export default new Router({
       meta: {
         icon: 'fas fa-calendar-alt',
         position: 'top',
-        displayName: 'calendar'
+        appName: 'Calendar'
       }
     }, {
       path: '/contacts',
@@ -51,7 +51,7 @@ export default new Router({
       meta: {
         icon: 'fas fa-address-book',
         position: 'top',
-        displayName: 'contacts'
+        appName: 'Contacts'
       }
     }, {
       path: '/freeflowconnect',
@@ -60,7 +60,7 @@ export default new Router({
       meta: {
         icon: 'fas fa-comments',
         position: 'top',
-        displayName: 'FreeFlow Connect'
+        appName: 'FF Connect'
       }
     }, {
       path: '/browser',
@@ -69,7 +69,7 @@ export default new Router({
       meta: {
         icon: 'far fa-globe-europe',
         position: 'top',
-        displayName: 'Browser'
+        appName: 'Browser'
       }
     }, {
       path: '/freeflowconnect/:roomName',
@@ -78,8 +78,8 @@ export default new Router({
       meta: {
         icon: 'fas fa-comments',
         position: 'top',
-        displayName: 'FreeFlow Connect',
-        hide: true
+        appName: 'FF Connect',
+        hidden: true
       }
     }, {
       path: '/appstore',
@@ -87,8 +87,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "appstore-page" */ './views/appstore'),
       meta: {
         icon: 'fas fa-th',
-        position: 'bottom',
-        displayName: 'ADApps'
+        position: 'bottom'
       }
     }
   ]

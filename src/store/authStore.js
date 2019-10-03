@@ -34,21 +34,12 @@ export default ({
       var signedHash = responseUrl.searchParams.get('signedhash')
 
       if (responseUrl.searchParams.get('error')) {
-        console.log('response')
         // context.commit('setFatalError', responseUrl.searchParams.get('error'))
       } else {
-        console.log('LOGIN')
         botService.getUserData(username).then(async (response) => {
           if (signedHash && context.getters.state !== await cryptoService.validateSignature(signedHash, response.data.publicKey)) {
             // context.commit('setFatalError', 'Invalid state.')
-            console.log('NEGATIVE')
-            console.log(signedHash)
-            console.log(context.getters.state)
-            console.log(await cryptoService.validateSignature(signedHash, response.data.publicKey))
           } else {
-            console.log('IVAN USERNAME')
-            console.log(username)
-
             context.commit('setAccount', { username })
           }
         })

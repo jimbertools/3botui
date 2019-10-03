@@ -22,9 +22,7 @@ export default ({
   decrypt (message, nonce, privateKey, publicKey) {
     return new Promise(async (resolve, reject) => {
       await sodium.ready
-      console.log(message)
       message = decodeBase64(message)
-      console.log(privateKey)
       privateKey = decodeBase64(privateKey)
       publicKey = sodium.crypto_sign_ed25519_pk_to_curve25519(decodeBase64(publicKey))
       nonce = decodeBase64(nonce)

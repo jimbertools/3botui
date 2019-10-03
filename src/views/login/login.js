@@ -18,9 +18,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.isLoggingIn)
     if (this.isLoggingIn) {
-      console.log(this.checkResponse)
       this.checkResponse(new URL(window.location.href))
     } else {
       this.generateLoginUrl()
