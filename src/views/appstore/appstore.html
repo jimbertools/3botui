@@ -1,6 +1,6 @@
 <section class="appstore">
   <v-col>
-    <h2 class="headline">AD Apps</h2>
+    <h2 class="headline">AD Apps {{selectedApp}}</h2>
     <v-row wrap>
       <v-flex d-flex v-for="(app, i) in apps" :key="i" xs3 class="pa-2">
         <v-card style="width: 100%;">
@@ -17,7 +17,7 @@
       </v-flex>
     </v-row>
   </v-col>
-  <v-dialog v-model="selectedApp" v-if="selectedApp" max-width="500px">
+  <v-dialog :value="!!selectedApp" v-if="!!selectedApp" max-width="500px" @click:outside="closeDialog(false)">
     <v-card>
       <v-card-title primary-title>
         Are you sure you want to <span v-if="selectedApp.installed" class="pl-1">un</span>install {{selectedApp.appname}}?
