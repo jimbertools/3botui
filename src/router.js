@@ -23,7 +23,8 @@ export default new Router({
       name: 'login',
       component: () => import(/* webpackChunkName: "mails-page" */ './views/login'),
       meta: {
-        position: 'none'
+        position: 'none',
+        hidden: true
       }
     },
     {

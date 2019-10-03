@@ -46,7 +46,7 @@
     </v-content>
     <v-bottom-navigation v-if="$vuetify.breakpoint.mdAndDown" grow dark class="primary topround" app fixed shift
       :value="$route.name">
-      <v-btn :value="route.name" icon v-for="(route, i) in routes" :key="i" @click="$router.push(route)">
+      <v-btn :value="route.name" icon v-for="(route, i) in routes.filter(x => !x.meta.hidden)" :key="i" @click="$router.push(route)">
         <span>{{route.name}}</span>
         <v-icon>{{route.meta.icon}}</v-icon>
       </v-btn>
