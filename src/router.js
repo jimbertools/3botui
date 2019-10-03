@@ -17,7 +17,16 @@ export default new Router({
         position: 'top',
         displayName: 'Mail'
       }
-    }, {
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "mails-page" */ './views/login'),
+      meta: {
+        position: 'none'
+      }
+    },
+    {
       path: '/mail',
       name: 'mail',
       component: () => import(/* webpackChunkName: "mails-page" */ './views/mails'),
