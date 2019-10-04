@@ -26,6 +26,7 @@ export default ({
       context.commit('setRooms', rooms)
     },
     setUserName: (context, userName) => {
+      console.log('Called setUserName')
       context.commit('setUserName', userName)
     },
     sendMessage: (context, message) => {

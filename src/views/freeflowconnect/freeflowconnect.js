@@ -1,4 +1,4 @@
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import JanusWrapper from '../../plugins/janus.videoroom'
 
 export default {
@@ -11,7 +11,7 @@ export default {
       expanded: false,
       showCreateRoomDialog: false,
       roomName: null,
-      userName: null,
+      // userName: null,
       janus: null,
       muted: false,
       published: false
@@ -19,19 +19,32 @@ export default {
   },
   computed: {
     ...mapGetters(['currentRoom']),
+    ...mapState(['userName']),
+
+    user: {
+      set (user) {
+        console.log('Seeeeetttttting: ' + user)
+        this.$store.commit('setUserName', user)
+      },
+      get () {
+        console.log(this.$store)
+        return this.$store.getters.userName
+      }
+    },
+
     roomNameFromRoute () {
       return this.$route.params.roomName
     },
     getUsers () {
-      let myUser = this.currentRoom.users.filter((userName) => userName === this.userName)
-      let otherUsers = this.currentRoom.users.filter((userName) => userName !== this.userName)
+      let myUser = this.currentRoom.users.filter((userName) => userName === this.user)
+      let otherUsers = this.currentRoom.users.filter((userName) => userName !== this.user)
       return myUser.concat(otherUsers)
     }
   },
   mounted () {
     this.roomName = this.roomNameFromRoute
 
-    if (this.userName === null || this.userName === undefined) {
+    if (this.user === null || this.user === undefined) {
       this.showCreateRoomDialog = true
       return
     }
@@ -39,7 +52,7 @@ export default {
     if (this.roomNameFromRoute !== undefined) {
       // join the room
       this.setCurrentRoom(this.roomNameFromRoute)
-      this.$socket.emit('joinRoom', { room: this.roomNameFromRoute, user: this.userName })
+      this.$socket.emit('joinRoom', { room: this.roomNameFromRoute, user: this.user })
 
       this.janus = new JanusWrapper(this.roomName)
       console.log(this.janus)
@@ -69,36 +82,36 @@ export default {
         }
 
         this.setCurrentRoom(this.roomName)
-        this.$socket.emit('joinRoom', { room: this.roomName, user: this.userName })
+        this.$socket.emit('joinRoom', { room: this.roomName, user: this.user })
 
         this.janus = new JanusWrapper(this.roomName)
         console.log(this.janus)
       }
     },
-    leave: function () {
+    leave () {
       console.log('We are going to attempt to disconnect.')
       this.janus.disconnect()
     },
-    join: function () {
+    join () {
       console.log('We are going to attempt to connect.')
       this.janus.connect(this.roomName)
     },
-    showUsers: function () {
+    showUsers () {
       console.log('showUsers in room ', this.roomName)
       this.janus.showUsers(this.roomName)
     },
-    toggleMute: function () {
+    toggleMute () {
       console.log('Toggling microphone')
 
       var isMuted = this.janus.toggleMute()
       this.muted = isMuted
     },
-    unpublish: function () {
+    unpublish () {
       console.log('Unpublishing feed')
       this.janus.unpublishOwnFeed()
       this.published = !this.published
     },
-    publish: function () {
+    publish () {
       console.log('Publishing feed')
       this.janus.publishOwnFeed(true)
       this.published = !this.published

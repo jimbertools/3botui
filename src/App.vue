@@ -19,7 +19,7 @@
           <v-list-item
             v-for="(route, i) in routes.filter(r => r.meta.position == 'top' && !r.meta.hide)"
             :key="i"
-            :to="route"
+            @click="switchApplication(route)"
             active-class="secondary--text"
           >
             <v-list-item-icon>
@@ -35,7 +35,7 @@
           <v-list-item
             v-for="(route, i) in routes.filter(r => r.meta.position == 'bottom' && !r.meta.hide)"
             :key="i"
-            :to="route"
+            @click="switchApplication(route)"
             active-class="secondary--text"
           >
             <v-list-item-icon>
@@ -66,7 +66,7 @@
         icon
         v-for="(route, i) in routes"
         :key="i"
-        @click="$router.push(route)"
+        @click="switchApplication(route)"
       >
         <span>{{route.meta.displayName}}</span>
         <v-icon>{{route.meta.icon}}</v-icon>
@@ -76,6 +76,9 @@
 </template>
 
 <script>
+
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: "App",
   components: {},
@@ -84,7 +87,22 @@ export default {
     showBadge: true,
     menu: false
   }),
+  methods: {
+    ...mapActions(['setUserName']),
+    switchApplication(route) {
+      console.log('Going from ' + this.$router.currentRoute.name + ' to ' + route.name)
+
+      if(this.$router.currentRoute.name === 'connect' || this.$router.currentRoute.name === 'connectWithRoom') {
+        // Disconnect from room. 
+        this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.userName })
+      }
+
+      if(this.$router.currentRoute.name !== route.name)
+      this.$router.push(route)
+    }
+  },
   computed: {
+    ...mapGetters(['currentRoom', 'userName']),
     routes() {
       return this.$router.options.routes;
     }
