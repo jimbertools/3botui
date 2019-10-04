@@ -19,7 +19,7 @@
           </v-toolbar>
         </div>
         <div>
-          <v-list-item v-for="(route, i) in topRoutes" :key="i" :to="route" active-class="secondary--text">
+          <v-list-item v-for="(route, i) in topRoutes" :key="i" @click="switchApplication(route)" active-class="secondary--text">
             <v-list-item-icon>
               <v-icon>{{ route.meta.icon }}</v-icon>
             </v-list-item-icon>
@@ -30,7 +30,7 @@
         </div>
         <v-spacer></v-spacer>
         <div>
-          <v-list-item v-for="(route, i) in bottomRoutes" :key="i" :to="route" active-class="secondary--text">
+          <v-list-item v-for="(route, i) in bottomRoutes" :key="i" @click="switchApplication(route)" active-class="secondary--text">
             <v-list-item-icon>
               <v-icon>{{ route.meta.icon }}</v-icon>
             </v-list-item-icon>
@@ -46,7 +46,7 @@
     </v-content>
     <v-bottom-navigation v-if="$vuetify.breakpoint.mdAndDown" grow dark class="primary topround" app fixed shift
       :value="$route.name">
-      <v-btn :value="route.name" icon v-for="(route, i) in routes.filter(x => !x.meta.hidden)" :key="i" @click="$router.push(route)">
+      <v-btn :value="route.name" icon v-for="(route, i) in routes.filter(x => !x.meta.hidden)" :key="i" @click="switchApplication(route)">
         <span>{{route.name}}</span>
         <v-icon>{{route.meta.icon}}</v-icon>
       </v-btn>

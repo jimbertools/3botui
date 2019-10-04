@@ -14,7 +14,9 @@ export default {
   computed: {
     ...mapGetters([
       'apps',
-      'activeApps'
+      'activeApps',
+      'currentRoom',
+      'userName'
     ]),
     routes () {
       return this.$router.options.routes
@@ -26,7 +28,7 @@ export default {
       return routes.concat(activeApps)
     },
     bottomRoutes () {
-      return this.routes.filter(r => r.meta.position == 'bottom' && !r.meta.hidden)
+      return this.routes.filter(r => r.meta.position === 'bottom' && !r.meta.hidden)
     },
     showOverlay () {
       var hasApps = this.apps && !!this.apps.length
@@ -39,7 +41,22 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getApps'
-    ])
+      'getApps',
+      'setUserName',
+      'clearCurrentRoom'
+    ]),
+    switchApplication (route) {
+      console.log('Going from ' + this.$router.currentRoute.name + ' to ' + route.name)
+
+      if (this.$router.currentRoute.name === 'connect' || this.$router.currentRoute.name === 'connectWithRoom') {
+        // Disconnect from room.
+        this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.userName })
+        this.clearCurrentRoom()
+      }
+
+      if (this.$router.currentRoute.name !== route.name) {
+        this.$router.push(route)
+      }
+    }
   }
 }

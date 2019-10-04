@@ -32,11 +32,15 @@ export default ({
     sendMessage: (context, message) => {
       context.commit('sendMessage', message)
     },
+    clearCurrentRoom: (context) => {
+      console.log('hi clearCurrentRoom')
+      context.commit('clearCurrentRoom')
+    },
     SOCKET_userJoined: (context, data) => {
       context.commit('addUserToCurrentRoom', data.user)
     },
-    SOCKET_userLeft: (context, data) => {
-      context.commit('removeUserFromCurrentRoom', data.user)
+    SOCKET_userLeft: (context, user) => {
+      context.commit('removeUserFromCurrentRoom', user)
     }
   },
   mutations: {
@@ -69,6 +73,11 @@ export default ({
     },
     setUserName (state, userName) {
       state.userName = userName
+    },
+    clearCurrentRoom (state) {
+      console.log('hi clearCurrentRoom2')
+      state.currentRoom.name = null
+      state.currentRoom.users = []
     }
   },
   getters: {
