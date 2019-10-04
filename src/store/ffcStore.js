@@ -76,6 +76,7 @@ export default ({
     },
     clearCurrentRoom (state) {
       console.log('hi clearCurrentRoom2')
+      state.userName = null
       state.currentRoom.name = null
       state.currentRoom.users = []
     }
