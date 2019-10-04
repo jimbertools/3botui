@@ -73,6 +73,15 @@ export default new Router({
         appName: 'Browser'
       }
     }, {
+      path: '/docs',
+      name: 'docs',
+      component: () => import(/* webpackChunkName: "browser-page" */ './views/docs'),
+      meta: {
+        icon: 'fas fa-file',
+        position: 'top',
+        appName: 'Docs'
+      }
+    }, {
       path: '/freeflowconnect/:roomName',
       name: 'connectWithRoom',
       component: () => import(/* webpackChunkName: "freeflowconnect-page" */ './views/freeflowconnect'),
