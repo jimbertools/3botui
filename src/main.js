@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
@@ -19,6 +19,16 @@ Vue.use(new VueSocketIO({
     mutationPrefix: 'SOCKET_'
   }
 }))
+
+/*router.beforeEach((to, from, next) => {
+  if ((to.name !== 'login' && to.name !== 'error') && !store.state.authStore.account) {
+    next({
+      name: 'login'
+    })
+  } else {
+    next()
+  }
+})*/
 
 Vue.config.productionTip = false
 new Vue({

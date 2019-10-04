@@ -1,3 +1,5 @@
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'home',
   components: {},
@@ -8,14 +10,12 @@ export default {
     }
   },
   computed: {
-    routes () {
-      return this.$router.options.routes
-    }
+    ...mapGetters([
+      'activeApps'
+    ])
   },
   mounted () {
-
   },
   methods: {
-
   }
 }

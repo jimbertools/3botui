@@ -72,8 +72,8 @@ export default {
     createRoom (events) {
       if (this.roomName !== null) {
         if (this.roomNameFromRoute === null || this.roomNameFromRoute === undefined) {
-          this.roomName = this.roomName + '-' + Math.random().toString(36).substring(2, 15).toUpperCase()
-
+//           this.roomName = this.roomName + '-' + Math.random().toString(36).substring(2, 15).toUpperCase()
+            console.log("temp!!!!!!! VUE router not in threebot yet");
           this.$router.push({
             name: 'connectWithRoom', params: { roomName: this.roomName }
           })
