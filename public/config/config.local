@@ -1,6 +1,6 @@
 export default ({
   tfApiUrl: 'https://radar.threefold.io/api/',
-  jsApiUrl: `http://172.17.0.2/actors/`,
+  jsApiUrl: `https://172.17.0.2/api/actors/`,
 
   apiUrl: 'http://192.168.2.62:3000',
   janus: 'http://192.168.2.62:8088/janus',
