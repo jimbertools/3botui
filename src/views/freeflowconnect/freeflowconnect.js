@@ -1,4 +1,4 @@
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import JanusWrapper from '../../plugins/janus.videoroom'
 
 export default {
@@ -11,46 +11,32 @@ export default {
       expanded: false,
       showCreateRoomDialog: false,
       roomName: null,
-      // userName: null,
       janus: null,
       muted: false,
       published: false
     }
   },
   computed: {
-    ...mapGetters(['currentRoom']),
-    ...mapState(['userName']),
-
-    user: {
-      set (user) {
-        console.log('Seeeeetttttting: ' + user)
-        this.$store.commit('setUserName', user)
-      },
-      get () {
-        console.log(this.$store)
-        return this.$store.getters.userName
-      }
-    },
-
+    ...mapGetters(['currentRoom', 'userName']),
     roomNameFromRoute () {
       return this.$route.params.roomName
     },
     getUsers () {
-      let myUser = this.currentRoom.users.filter((userName) => userName === this.user)
-      let otherUsers = this.currentRoom.users.filter((userName) => userName !== this.user)
+      let myUser = this.currentRoom.users.filter((userName) => userName === this.userName)
+      let otherUsers = this.currentRoom.users.filter((userName) => userName !== this.userName)
       return myUser.concat(otherUsers)
     }
   },
   mounted () {
     console.log('mounted !!!!!!!!!!!!!!!!!!!')
-    console.log(this.user)
+    console.log(this.userName)
     console.log(this.roomName)
     console.log(this.roomNameFromRoute)
 
     this.roomName = this.roomNameFromRoute
 
-    if (this.user === null || this.user === undefined) {
-      console.log('this.user: ' + this.user)
+    if (this.userName === null || this.userName === undefined) {
+      console.log('this.userName: ' + this.userName)
       this.showCreateRoomDialog = true
       return
     }
@@ -58,7 +44,7 @@ export default {
     if (this.roomNameFromRoute !== undefined) {
       // join the room
       this.setCurrentRoom(this.roomNameFromRoute)
-      this.$socket.emit('joinRoom', { room: this.roomNameFromRoute, user: this.user })
+      this.$socket.emit('joinRoom', { room: this.roomNameFromRoute, user: this.userName })
 
       this.janus = new JanusWrapper(this.roomName)
       console.log(this.janus)
@@ -68,18 +54,16 @@ export default {
   },
   methods: {
     ...mapActions(['setCurrentRoom', 'getCurrentRoom', 'clearCurrentRoom']),
-
     confirmRoomName () {
       this.showCreateRoomDialog = false
       console.log('Helloooooo: ' + this.roomName)
       this.createRoom()
     },
-
     createRoom (events) {
       console.log('Creating room')
       if (this.roomName !== null) {
         if (this.roomNameFromRoute === null || this.roomNameFromRoute === undefined) {
-          // this.roomName = this.roomName + '-' + Math.random().toString(36).substring(2, 15).toUpperCase()
+          //           this.roomName = this.roomName + '-' + Math.random().toString(36).substring(2, 15).toUpperCase()
           console.log('temp!!!!!!! VUE router not in threebot yet')
           this.$router.push({
             name: 'connectWithRoom', params: { roomName: this.roomName }
@@ -91,7 +75,7 @@ export default {
         console.log('Setting current roomName: ' + this.roomName)
 
         this.setCurrentRoom(this.roomName)
-        this.$socket.emit('joinRoom', { room: this.roomName, user: this.user })
+        this.$socket.emit('joinRoom', { room: this.roomName, user: this.userName })
 
         this.janus = new JanusWrapper(this.roomName)
         console.log(this.janus)
