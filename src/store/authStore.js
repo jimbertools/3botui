@@ -9,7 +9,7 @@ export default ({
     state: window.localStorage.getItem('state') || null,
     keys: window.localStorage.getItem('tempKeys') ? JSON.parse(window.localStorage.getItem('tempKeys')) : null,
     loginUrl: null,
-    account: null
+    account: window.localStorage.getItem('username') || null
   },
   actions: {
     async generateLoginUrl (context) {
@@ -41,6 +41,7 @@ export default ({
             // context.commit('setFatalError', 'Invalid state.')
           } else {
             context.commit('setAccount', { username })
+            window.localStorage.setItem('username', username)
           }
         })
         // .catch(e => context.commit('setFatalError', 'Signature failed, please try again.'))
