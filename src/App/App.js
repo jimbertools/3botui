@@ -31,7 +31,8 @@ export default {
     showOverlay () {
       var hasApps = this.apps && !!this.apps.length
       var isLoading = this.$wait.is('getApps')
-      return !hasApps && isLoading
+      return false
+      // return !hasApps && isLoading
     }
   },
   mounted () {

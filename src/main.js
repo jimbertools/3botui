@@ -20,7 +20,7 @@ Vue.use(new VueSocketIO({
   }
 }))
 
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if ((to.name !== 'login' && to.name !== 'error') && !store.state.authStore.account) {
     next({
       name: 'login'
@@ -28,7 +28,7 @@ Vue.use(new VueSocketIO({
   } else {
     next()
   }
-})*/
+})
 
 Vue.config.productionTip = false
 new Vue({
