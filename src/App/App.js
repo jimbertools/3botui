@@ -16,7 +16,7 @@ export default {
       'apps',
       'activeApps',
       'currentRoom',
-      'userName'
+      'account'
     ]),
     routes () {
       return this.$router.options.routes
@@ -42,7 +42,6 @@ export default {
   methods: {
     ...mapActions([
       'getApps',
-      'setUserName',
       'clearCurrentRoom'
     ]),
     switchApplication (route) {
@@ -50,7 +49,7 @@ export default {
 
       if (this.$router.currentRoute.name === 'connect' || this.$router.currentRoute.name === 'connectWithRoom') {
         // Disconnect from room.
-        this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.userName })
+        this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.account })
         this.clearCurrentRoom()
       }
 
