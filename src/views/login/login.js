@@ -2,7 +2,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'login',
   components: {},
-  props: [],
+  props: ['takeMeTo'],
   data () {
     return {
 
@@ -14,13 +14,14 @@ export default {
       'account'
     ]),
     isLoggingIn () {
-      return !!window.location.search
+      return !!this.$route.query.username
     }
   },
   mounted () {
     if (this.isLoggingIn) {
       this.checkResponse(new URL(window.location.href))
     } else {
+      console.log('going to generate')
       this.generateLoginUrl()
     }
   },
@@ -33,11 +34,18 @@ export default {
   watch: {
     account (val) {
       if (val) {
-        this.$router.push({ name: 'home' })
+        let to = localStorage.getItem('loginRedirectUrl')
+        if (to && to !== 'null' && to !== 'undefined') {
+          localStorage.removeItem('loginRedirectUrl')
+          window.location.href = to
+        } else {
+          this.$router.push({ name: 'home' })
+        }
       }
     },
     loginUrl (val) {
       if (val) {
+        console.log('loginurl set')
         window.location.href = val
       }
     }

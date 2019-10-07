@@ -30,10 +30,12 @@ export default ({
       context.commit('setKeys', keys)
 
       context.commit('setLoginUrl', `${config.botFrontEnd}?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(keys.publicKey)}&redirecturl=${encodeURIComponent(config.redirect_url)}`)
+      console.log('setted stuff')
     },
     async checkResponse (context, responseUrl) {
       var username = responseUrl.searchParams.get('username')
       var signedHash = responseUrl.searchParams.get('signedhash')
+
 
       if (responseUrl.searchParams.get('error')) {
         // context.commit('setFatalError', responseUrl.searchParams.get('error'))
