@@ -605,7 +605,7 @@ class JimberJanusVideoRoom {
         // Janus.log(' ::: Got a cleanup notification (remote feed ' + id + ') :::')
 
         console.log(remoteFeed)
-        document.getElementById('feed' + remoteFeed.rfindex).srcObject = null
+        // document.getElementById('feed' + remoteFeed.rfindex).srcObject = null
         remoteFeed.mystream = null
         // mystream = null;
         // document.getElementById('participant1').srcObject = null

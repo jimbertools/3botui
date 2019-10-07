@@ -11,14 +11,13 @@ export default {
       expanded: false,
       showCreateRoomDialog: false,
       roomName: null,
-      userName: null,
       janus: null,
       muted: false,
       published: false
     }
   },
   computed: {
-    ...mapGetters(['currentRoom']),
+    ...mapGetters(['currentRoom', 'userName']),
     roomNameFromRoute () {
       return this.$route.params.roomName
     },
@@ -29,9 +28,15 @@ export default {
     }
   },
   mounted () {
+    console.log('mounted !!!!!!!!!!!!!!!!!!!')
+    console.log(this.userName)
+    console.log(this.roomName)
+    console.log(this.roomNameFromRoute)
+
     this.roomName = this.roomNameFromRoute
 
     if (this.userName === null || this.userName === undefined) {
+      console.log('this.userName: ' + this.userName)
       this.showCreateRoomDialog = true
       return
     }
@@ -48,25 +53,26 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setCurrentRoom', 'getCurrentRoom']),
-
+    ...mapActions(['setCurrentRoom', 'getCurrentRoom', 'clearCurrentRoom']),
     confirmRoomName () {
       this.showCreateRoomDialog = false
       console.log('Helloooooo: ' + this.roomName)
       this.createRoom()
     },
-
     createRoom (events) {
+      console.log('Creating room')
       if (this.roomName !== null) {
         if (this.roomNameFromRoute === null || this.roomNameFromRoute === undefined) {
-          this.roomName = this.roomName + '-' + Math.random().toString(36).substring(2, 15).toUpperCase()
-
+          //           this.roomName = this.roomName + '-' + Math.random().toString(36).substring(2, 15).toUpperCase()
+          console.log('temp!!!!!!! VUE router not in threebot yet')
           this.$router.push({
             name: 'connectWithRoom', params: { roomName: this.roomName }
           })
         } else {
           this.roomName = this.roomNameFromRoute
         }
+
+        console.log('Setting current roomName: ' + this.roomName)
 
         this.setCurrentRoom(this.roomName)
         this.$socket.emit('joinRoom', { room: this.roomName, user: this.userName })
@@ -75,33 +81,45 @@ export default {
         console.log(this.janus)
       }
     },
-    leave: function () {
+    leave () {
       console.log('We are going to attempt to disconnect.')
       this.janus.disconnect()
     },
-    join: function () {
+    join () {
       console.log('We are going to attempt to connect.')
       this.janus.connect(this.roomName)
     },
-    showUsers: function () {
+    showUsers () {
       console.log('showUsers in room ', this.roomName)
       this.janus.showUsers(this.roomName)
     },
-    toggleMute: function () {
+    toggleMute () {
       console.log('Toggling microphone')
 
       var isMuted = this.janus.toggleMute()
       this.muted = isMuted
     },
-    unpublish: function () {
+    unpublish () {
       console.log('Unpublishing feed')
       this.janus.unpublishOwnFeed()
       this.published = !this.published
     },
-    publish: function () {
+    publish () {
       console.log('Publishing feed')
       this.janus.publishOwnFeed(true)
       this.published = !this.published
     }
+  },
+  destroyed: function () {
+    console.log('Destroyed lifecycle .... ')
+    this.message = null
+    this.expanded = false
+    this.showCreateRoomDialog = false
+    this.roomName = null
+    this.janus = null
+    this.muted = false
+    this.published = false
+
+    this.clearCurrentRoom()
   }
 }
