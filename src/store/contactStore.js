@@ -1,6 +1,6 @@
 import contactService from '../services/contactService'
 
-export default({
+export default ({
   state: {
     contacts: []
   },
