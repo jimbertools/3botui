@@ -12,7 +12,7 @@ export default ({
     account: window.localStorage.getItem('username') || null
   },
   actions: {
-    async generateLoginUrl (context, takeMeTo) {
+    async generateLoginUrl (context) {
       context.dispatch('clearStorage')
       var state = ''
       var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -27,7 +27,8 @@ export default ({
       context.commit('setState', state)
       context.commit('setKeys', keys)
 
-      context.commit('setLoginUrl', `${config.botFrontEnd}?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(keys.publicKey)}&redirecturl=${encodeURIComponent(config.redirect_url + '?takeMeTo=' + takeMeTo.substr(1))}`)
+      context.commit('setLoginUrl', `${config.botFrontEnd}?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(keys.publicKey)}&redirecturl=${encodeURIComponent(config.redirect_url)}`)
+      console.log('setted stuff')
     },
     async checkResponse (context, responseUrl) {
       var username = responseUrl.searchParams.get('username')
@@ -63,7 +64,6 @@ export default ({
       state.state = stateHash
     },
     setLoginUrl (state, url) {
-      console.log(url)
       state.loginUrl = url
     },
     setAccount (state, account) {

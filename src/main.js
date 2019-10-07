@@ -22,9 +22,9 @@ Vue.use(new VueSocketIO({
 
 router.beforeEach((to, from, next) => {
   if ((to.name !== 'login' && to.name !== 'error') && !store.state.authStore.account) {
+    localStorage.setItem('loginRedirectUrl', window.location.href)
     next({
-      name: 'login',
-      query: { takeMeTo: document.location.pathname }
+      name: 'login'
     })
   } else {
     next()

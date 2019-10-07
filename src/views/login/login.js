@@ -21,9 +21,8 @@ export default {
     if (this.isLoggingIn) {
       this.checkResponse(new URL(window.location.href))
     } else {
-      console.log(this.$route)
-      console.log(this.$route.takeMeTo)
-      this.generateLoginUrl(this.$route.query.takeMeTo)
+      console.log('going to generate')
+      this.generateLoginUrl()
     }
   },
   methods: {
@@ -35,18 +34,18 @@ export default {
   watch: {
     account (val) {
       if (val) {
-        let to = 'home'
-        if (this.$route.query.takeMeTo) {
-          to = decodeURIComponent(this.$route.query.takeMeTo)
-          console.log(`/${to}`)
-          window.location.href = `/${to}` // Is this safe? @singlecore
+        let to = localStorage.getItem('loginRedirectUrl')
+        if (to && to !== 'null' && to !== 'undefined') {
+          localStorage.removeItem('loginRedirectUrl')
+          window.location.href = to
         } else {
-          this.$router.push({ name: to })
+          this.$router.push({ name: 'home' })
         }
       }
     },
     loginUrl (val) {
       if (val) {
+        console.log('loginurl set')
         window.location.href = val
       }
     }
