@@ -1,3 +1,7 @@
+import Vue from 'vue'
+import VueSocketIO from 'vue-socket.io'
+import Config from '../../../public/config'
+import store from '../../store'
 import { mapActions, mapGetters } from 'vuex'
 import JanusWrapper from '../../plugins/janus.videoroom'
 
@@ -28,6 +32,16 @@ export default {
     }
   },
   mounted () {
+    Vue.use(new VueSocketIO({
+      debug: true,
+      connection: Config.apiUrl + '/rooms-ws',
+      vuex: {
+        store,
+        actionPrefix: 'SOCKET_',
+        mutationPrefix: 'SOCKET_'
+      }
+    }))
+
     console.log('mounted !!!!!!!!!!!!!!!!!!!')
     console.log(this.account)
     console.log(this.roomName)

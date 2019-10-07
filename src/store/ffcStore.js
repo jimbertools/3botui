@@ -79,6 +79,7 @@ export default ({
       // state.userName = null
       state.currentRoom.name = null
       state.currentRoom.users = []
+      this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.account })
     }
   },
   getters: {

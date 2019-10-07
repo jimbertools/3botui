@@ -57,7 +57,6 @@ export default {
 
       if (this.$router.currentRoute.name === 'connect' || this.$router.currentRoute.name === 'connectWithRoom') {
         // Disconnect from room.
-        this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.account })
         this.clearCurrentRoom()
       }
 
