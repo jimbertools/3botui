@@ -12,7 +12,7 @@ export default ({
     account: window.localStorage.getItem('username') || null
   },
   actions: {
-    async generateLoginUrl (context) {
+    async generateLoginUrl (context, takeMeTo) {
       context.dispatch('clearStorage')
       var state = ''
       var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -27,11 +27,12 @@ export default ({
       context.commit('setState', state)
       context.commit('setKeys', keys)
 
-      context.commit('setLoginUrl', `${config.botFrontEnd}?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(keys.publicKey)}&redirecturl=${encodeURIComponent(config.redirect_url)}`)
+      context.commit('setLoginUrl', `${config.botFrontEnd}?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(keys.publicKey)}&redirecturl=${encodeURIComponent(config.redirect_url + '?takeMeTo=' + takeMeTo.substr(1))}`)
     },
     async checkResponse (context, responseUrl) {
       var username = responseUrl.searchParams.get('username')
       var signedHash = responseUrl.searchParams.get('signedhash')
+
 
       if (responseUrl.searchParams.get('error')) {
         // context.commit('setFatalError', responseUrl.searchParams.get('error'))
@@ -62,6 +63,7 @@ export default ({
       state.state = stateHash
     },
     setLoginUrl (state, url) {
+      console.log(url)
       state.loginUrl = url
     },
     setAccount (state, account) {
