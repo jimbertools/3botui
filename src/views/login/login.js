@@ -39,7 +39,7 @@ export default {
         if (this.$route.query.takeMeTo) {
           to = decodeURIComponent(this.$route.query.takeMeTo)
           console.log(`/${to}`)
-          window.location.href = `/${to}`
+          window.location.href = `/${to}` // Is this safe? @singlecore
         } else {
           this.$router.push({ name: to })
         }
