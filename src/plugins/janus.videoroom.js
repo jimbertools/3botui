@@ -388,19 +388,29 @@ class JimberJanusVideoRoom {
                 // document.getElementById('videos').prepend(video)
                 // Janus.attachMediaStream(video, stream)
 
+                // var video
+
+                // if (document.getElementById('feed0') === null) {
+                //   video = document.createElement('video')
+                //   video.id = 'feed0'
+                //   video.setAttribute('autoplay', 'true')
+                //   document.getElementById('videos').appendChild(video)
+                // } else {
+                //   video = document.getElementById('feed0')
+                //   video.setAttribute('autoplay', 'true')
+                // }
+
+                // video.muted = 'muted'
+                // Janus.attachMediaStream(video, stream)
                 var video
 
-                if (document.getElementById('feed0') === null) {
-                  video = document.createElement('video')
-                  video.id = 'feed0'
-                  video.setAttribute('autoplay', 'true')
-                  document.getElementById('videos').appendChild(video)
-                } else {
+                if (document.getElementById('feed0') !== null) {
                   video = document.getElementById('feed0')
                   video.setAttribute('autoplay', 'true')
-                }
 
-                Janus.attachMediaStream(video, stream)
+                  video.muted = 'muted'
+                  Janus.attachMediaStream(video, stream)
+                }
 
                 if (instance.sfutest.webrtcStuff.pc.iceConnectionState !== 'completed' &&
                 instance.sfutest.webrtcStuff.pc.iceConnectionState !== 'connected') {}
@@ -580,15 +590,24 @@ class JimberJanusVideoRoom {
         // console.log('streamstreamstreamstreamstreamstreamstreamstreamstream')
         // console.log(stream)
 
+        // var video
+
+        // if (document.getElementById('feed' + remoteFeed.rfindex) === null) {
+        //   console.log('Attaching remoteFeed.id : ' + remoteFeed.id + '.')
+        //   video = document.createElement('video')
+        //   video.id = 'feed' + remoteFeed.rfindex
+        //   video.setAttribute('autoplay', 'true')
+        //   document.getElementById('videos').appendChild(video)
+        // } else {
+        //   console.log('feed.id : ' + remoteFeed.id + ' has already been attached.')
+        //   video = document.getElementById('feed' + remoteFeed.rfindex)
+        //   video.setAttribute('autoplay', 'true')
+        // }
+
+        // Janus.attachMediaStream(video, stream)
         var video
 
-        if (document.getElementById('feed' + remoteFeed.rfindex) === null) {
-          console.log('Attaching remoteFeed.id : ' + remoteFeed.id + '.')
-          video = document.createElement('video')
-          video.id = 'feed' + remoteFeed.rfindex
-          video.setAttribute('autoplay', 'true')
-          document.getElementById('videos').appendChild(video)
-        } else {
+        if (document.getElementById('feed' + remoteFeed.rfindex) !== null) {
           console.log('feed.id : ' + remoteFeed.id + ' has already been attached.')
           video = document.getElementById('feed' + remoteFeed.rfindex)
           video.setAttribute('autoplay', 'true')
