@@ -1,4 +1,4 @@
-import { encodeBase64, decodeBase64, encodeUTF8, decodeUTF8 } from 'tweetnacl-util'
+import { encodeBase64, decodeBase64, encodeUTF8 } from 'tweetnacl-util'
 import sodium from 'libsodium-wrappers'
 const bip39 = require('bip39')
 

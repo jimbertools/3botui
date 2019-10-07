@@ -11,6 +11,9 @@ export default ({
     account: window.localStorage.getItem('username') || null
   },
   actions: {
+    logout (context) {
+      context.commit('setAccount', null)
+    },
     async generateLoginUrl (context) {
       context.dispatch('clearStorage')
       var state = ''
