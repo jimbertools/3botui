@@ -31,8 +31,7 @@
         </div>
         <v-spacer></v-spacer>
         <div>
-          <v-list-item v-for="(route, i) in bottomRoutes" :key="i" @click="switchApplication(route)"
-            active-class="secondary--text">
+          <v-list-item v-for="(route, i) in bottomRoutes" :key="i" active-class="secondary--text" :to="route">
             <v-list-item-icon>
               <v-icon>{{ route.meta.icon }}</v-icon>
             </v-list-item-icon>
