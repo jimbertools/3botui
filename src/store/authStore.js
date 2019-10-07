@@ -2,7 +2,6 @@
 import botService from '../services/3botService'
 import config from '../../public/config'
 import cryptoService from '../services/cryptoService'
-import { decodeBase64 } from 'tweetnacl-util'
 
 export default ({
   state: {
@@ -40,7 +39,7 @@ export default ({
           if (signedHash && context.getters.state !== await cryptoService.validateSignature(signedHash, response.data.publicKey)) {
             // context.commit('setFatalError', 'Invalid state.')
           } else {
-            context.commit('setAccount', { username })
+            context.commit('setAccount', username)
             window.localStorage.setItem('username', username)
           }
         })
