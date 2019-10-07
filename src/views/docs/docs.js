@@ -1,7 +1,5 @@
-import { mapGetters } from 'vuex'
-
 export default {
-  name: 'home',
+  name: 'docs',
   components: {},
   props: [],
   data () {
@@ -10,12 +8,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'activeApps'
-    ])
+
   },
   mounted () {
+
   },
   methods: {
+
   }
 }

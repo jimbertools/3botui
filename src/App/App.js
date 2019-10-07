@@ -16,7 +16,7 @@ export default {
       'apps',
       'activeApps',
       'currentRoom',
-      'userName'
+      'account'
     ]),
     routes () {
       return this.$router.options.routes
@@ -34,6 +34,9 @@ export default {
       var hasApps = this.apps && !!this.apps.length
       var isLoading = this.$wait.is('getApps')
       return !hasApps && isLoading
+    },
+    bottomNavApps () {
+      return this.topRoutes.concat(this.bottomRoutes)
     }
   },
   mounted () {
@@ -42,15 +45,18 @@ export default {
   methods: {
     ...mapActions([
       'getApps',
-      'setUserName',
+      'logout',
       'clearCurrentRoom'
     ]),
+    signOut () {
+      this.logout()
+      this.$router.push({ name: 'home' })
+    },
     switchApplication (route) {
       console.log('Going from ' + this.$router.currentRoute.name + ' to ' + route.name)
 
       if (this.$router.currentRoute.name === 'connect' || this.$router.currentRoute.name === 'connectWithRoom') {
         // Disconnect from room.
-        this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.userName })
         this.clearCurrentRoom()
       }
 

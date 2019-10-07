@@ -1,3 +1,7 @@
+import Vue from 'vue'
+import VueSocketIO from 'vue-socket.io'
+import Config from '../../../public/config'
+import store from '../../store'
 import { mapActions, mapGetters } from 'vuex'
 import JanusWrapper from '../../plugins/janus.videoroom'
 
@@ -17,26 +21,42 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentRoom', 'userName']),
+    ...mapGetters(['currentRoom', 'account']),
     roomNameFromRoute () {
       return this.$route.params.roomName
     },
     getUsers () {
-      let myUser = this.currentRoom.users.filter((userName) => userName === this.userName)
-      let otherUsers = this.currentRoom.users.filter((userName) => userName !== this.userName)
+      let myUser = this.currentRoom.users.filter((userName) => userName === this.account)
+      let otherUsers = this.currentRoom.users.filter((userName) => userName !== this.account)
       return myUser.concat(otherUsers)
     }
   },
   mounted () {
+    Vue.use(new VueSocketIO({
+      debug: true,
+      connection: Config.apiUrl + '/rooms-ws',
+      vuex: {
+        store,
+        actionPrefix: 'SOCKET_',
+        mutationPrefix: 'SOCKET_'
+      }
+    }))
+
     console.log('mounted !!!!!!!!!!!!!!!!!!!')
-    console.log(this.userName)
+    console.log(this.account)
     console.log(this.roomName)
     console.log(this.roomNameFromRoute)
 
     this.roomName = this.roomNameFromRoute
 
-    if (this.userName === null || this.userName === undefined) {
-      console.log('this.userName: ' + this.userName)
+    if (this.account === null || this.account === undefined) {
+      console.log('this.userName: ' + this.account)
+      this.showCreateRoomDialog = true
+      return
+    }
+
+    if (this.roomName === null || this.roomName === undefined) {
+      console.log('this.userName: ' + this.account)
       this.showCreateRoomDialog = true
       return
     }
@@ -44,7 +64,7 @@ export default {
     if (this.roomNameFromRoute !== undefined) {
       // join the room
       this.setCurrentRoom(this.roomNameFromRoute)
-      this.$socket.emit('joinRoom', { room: this.roomNameFromRoute, user: this.userName })
+      this.$socket.emit('joinRoom', { room: this.roomNameFromRoute, user: this.account })
 
       this.janus = new JanusWrapper(this.roomName)
       console.log(this.janus)
@@ -75,7 +95,7 @@ export default {
         console.log('Setting current roomName: ' + this.roomName)
 
         this.setCurrentRoom(this.roomName)
-        this.$socket.emit('joinRoom', { room: this.roomName, user: this.userName })
+        this.$socket.emit('joinRoom', { room: this.roomName, user: this.account })
 
         this.janus = new JanusWrapper(this.roomName)
         console.log(this.janus)

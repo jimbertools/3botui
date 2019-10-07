@@ -5,8 +5,8 @@ export default ({
     currentRoom: {
       name: null,
       users: []
-    },
-    userName: null
+    }
+    // userName: null
   },
   actions: {
     setCurrentRoom: (context, room) => {
@@ -25,10 +25,10 @@ export default ({
     setRooms: (context, rooms) => {
       context.commit('setRooms', rooms)
     },
-    setUserName: (context, userName) => {
-      console.log('Called setUserName')
-      context.commit('setUserName', userName)
-    },
+    // setUserName: (context, userName) => {
+    //   console.log('Called setUserName')
+    //   context.commit('setUserName', userName)
+    // },
     sendMessage: (context, message) => {
       context.commit('sendMessage', message)
     },
@@ -71,21 +71,22 @@ export default ({
         console.log('Done removing user from current room', JSON.stringify(state.currentRoom))
       }
     },
-    setUserName (state, userName) {
-      state.userName = userName
-    },
+    // setUserName (state, userName) {
+    //   state.userName = userName
+    // },
     clearCurrentRoom (state) {
       console.log('hi clearCurrentRoom2')
-      state.userName = null
+      // state.userName = null
       state.currentRoom.name = null
       state.currentRoom.users = []
+      this.$socket.emit('leaveRoom', { room: this.currentRoom.name, user: this.account })
     }
   },
   getters: {
     currentRoom: state => state.currentRoom,
     rooms: state => state.rooms,
     currentPeers: state => state.currentPeers, // Doesn't exist?
-    userName: state => state.userName,
+    // userName: state => state.userName,
     messages: state => state.messages
   }
 })

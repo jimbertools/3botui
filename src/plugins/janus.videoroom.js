@@ -56,7 +56,10 @@ class JimberJanusVideoRoom {
 
     if (instance == null || instance.sfutest == null) {
       instance = null
+
+      // eslint-disable-next-line no-new
       new JimberJanusVideoRoom(roomName)
+
       return
     }
 
@@ -66,13 +69,11 @@ class JimberJanusVideoRoom {
         console.error('Error: ', err)
       },
       success: (data) => {
-        // console.log('Successfully left room ... ', instance.tmpId)
-
-        // console.log(instance.sfutest)
-
         instance.sfutest.detach()
 
         instance = null
+
+        // eslint-disable-next-line no-new
         new JimberJanusVideoRoom(roomName)
       }
     })
@@ -98,27 +99,10 @@ class JimberJanusVideoRoom {
   }
 
   connect (roomName) {
-    // console.log('Trying to join room with id ' + instance.tmpId + ' and username ' + instance.myusername)
-
     instance = null
+
+    // eslint-disable-next-line no-new
     new JimberJanusVideoRoom(roomName)
-
-    // var join = {
-    //   'request': 'join',
-    //   'room': instance.tmpId,
-    //   'ptype': 'joinandconfigure',
-    //   'display': instance.myusername
-    // }
-
-    // instance.sfutest.send({
-    //   'message': join,
-    //   error: (err) => {
-    //     console.error('Error: ', err)
-    //   },
-    //   success: (data) => {
-    //     // console.log('success?')
-    //   }
-    // })
   }
 
   showUsers (roomName) {
@@ -215,7 +199,7 @@ class JimberJanusVideoRoom {
                       instance.sfutest.send({
                         'message': register,
                         error: (err) => {
-                          // console.log('Error joining room: ', err)
+                          console.log('Error joining room: ', err)
                         },
                         success: (data) => {
                           // console.log('Success join room: ', data)
@@ -234,7 +218,7 @@ class JimberJanusVideoRoom {
                           'is_private': false
                         },
                         error: (err) => {
-                          // console.log('Error creating room: ', err)
+                          console.log('Error creating room: ', err)
                         },
                         success: (data) => {
                           // console.log('Success creating room: ', data)
@@ -388,19 +372,29 @@ class JimberJanusVideoRoom {
                 // document.getElementById('videos').prepend(video)
                 // Janus.attachMediaStream(video, stream)
 
+                // var video
+
+                // if (document.getElementById('feed0') === null) {
+                //   video = document.createElement('video')
+                //   video.id = 'feed0'
+                //   video.setAttribute('autoplay', 'true')
+                //   document.getElementById('videos').appendChild(video)
+                // } else {
+                //   video = document.getElementById('feed0')
+                //   video.setAttribute('autoplay', 'true')
+                // }
+
+                // video.muted = 'muted'
+                // Janus.attachMediaStream(video, stream)
                 var video
 
-                if (document.getElementById('feed0') === null) {
-                  video = document.createElement('video')
-                  video.id = 'feed0'
-                  video.setAttribute('autoplay', 'true')
-                  document.getElementById('videos').appendChild(video)
-                } else {
+                if (document.getElementById('feed0') !== null) {
                   video = document.getElementById('feed0')
                   video.setAttribute('autoplay', 'true')
-                }
 
-                Janus.attachMediaStream(video, stream)
+                  video.muted = 'muted'
+                  Janus.attachMediaStream(video, stream)
+                }
 
                 if (instance.sfutest.webrtcStuff.pc.iceConnectionState !== 'completed' &&
                 instance.sfutest.webrtcStuff.pc.iceConnectionState !== 'connected') {}
@@ -422,8 +416,7 @@ class JimberJanusVideoRoom {
             })
           },
           error: function (error) {
-            // console.log('janus Error')
-            // console.log(error)
+            console.log(error)
           },
           destroyed: function () {
             // console.log('janus destroyed')
@@ -580,15 +573,24 @@ class JimberJanusVideoRoom {
         // console.log('streamstreamstreamstreamstreamstreamstreamstreamstream')
         // console.log(stream)
 
+        // var video
+
+        // if (document.getElementById('feed' + remoteFeed.rfindex) === null) {
+        //   console.log('Attaching remoteFeed.id : ' + remoteFeed.id + '.')
+        //   video = document.createElement('video')
+        //   video.id = 'feed' + remoteFeed.rfindex
+        //   video.setAttribute('autoplay', 'true')
+        //   document.getElementById('videos').appendChild(video)
+        // } else {
+        //   console.log('feed.id : ' + remoteFeed.id + ' has already been attached.')
+        //   video = document.getElementById('feed' + remoteFeed.rfindex)
+        //   video.setAttribute('autoplay', 'true')
+        // }
+
+        // Janus.attachMediaStream(video, stream)
         var video
 
-        if (document.getElementById('feed' + remoteFeed.rfindex) === null) {
-          console.log('Attaching remoteFeed.id : ' + remoteFeed.id + '.')
-          video = document.createElement('video')
-          video.id = 'feed' + remoteFeed.rfindex
-          video.setAttribute('autoplay', 'true')
-          document.getElementById('videos').appendChild(video)
-        } else {
+        if (document.getElementById('feed' + remoteFeed.rfindex) !== null) {
           console.log('feed.id : ' + remoteFeed.id + ' has already been attached.')
           video = document.getElementById('feed' + remoteFeed.rfindex)
           video.setAttribute('autoplay', 'true')
