@@ -400,6 +400,7 @@ class JimberJanusVideoRoom {
                   video.setAttribute('autoplay', 'true')
                 }
 
+                video.muted = 'muted'
                 Janus.attachMediaStream(video, stream)
 
                 if (instance.sfutest.webrtcStuff.pc.iceConnectionState !== 'completed' &&
