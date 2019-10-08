@@ -50,7 +50,7 @@ export default {
     ]),
     signOut () {
       this.logout()
-      this.$router.push({ name: 'home' })
+      this.$router.push({ name: 'login' })
     },
     switchApplication (route) {
       console.log('Going from ' + this.$router.currentRoute.name + ' to ' + route.name)
