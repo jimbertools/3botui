@@ -2,7 +2,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'login',
   components: {},
-  props: ['takeMeTo'],
+  props: [],
   data () {
     return {
 
@@ -21,7 +21,6 @@ export default {
     if (this.isLoggingIn) {
       this.checkResponse(new URL(window.location.href))
     } else {
-      console.log('going to generate')
       this.generateLoginUrl()
     }
   },
@@ -45,7 +44,6 @@ export default {
     },
     loginUrl (val) {
       if (val) {
-        console.log('loginurl set')
         window.location.href = val
       }
     }
