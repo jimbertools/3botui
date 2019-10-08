@@ -20,10 +20,10 @@ export default {
           start: '2019-01-09 12:30',
           end: '2019-01-09 15:30'
         },
-        {
-          name: '<img src="x" onerror=alert()>',
-          start: '2019-01-10'
-        }
+//         {
+//           name: '<img src="x" onerror=alert()>',
+//           start: '2019-01-10'
+//         }
       ]
     }
   },
