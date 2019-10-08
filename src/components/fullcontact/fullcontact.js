@@ -1,9 +1,10 @@
 import { mapActions } from 'vuex'
 import config from '../../../public/config'
 import cloneDeep from 'lodash.clonedeep'
+
 export default {
   name: 'fullcontact',
-  components: { },
+  components: {},
   props: {
     editable: {
       type: Boolean,
@@ -30,15 +31,7 @@ export default {
         email: [{}],
         phone_numbers: [{}]
       },
-      birthDateDialog: false,
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 100) || 'Name must be less than 100 characters'
-      ],
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
-      ]
+      birthDateDialog: false
     }
   },
   computed: {
@@ -60,15 +53,52 @@ export default {
       'deleteContact',
       'createContact'
     ]),
-    updateContact () {
-      // TODO check if last phone_numbers / email / address is filled in
+    updateFavorite (isFavorite) {
+      this.currentContact.favorite = isFavorite
       this.createContact(this.currentContact)
-      this.edit = false
-      this.$emit('update')
+    },
+    openFilePicker () {
+      this.$refs.image.click()
+    },
+    onFilePicked (e) {
+      const files = e.target.files
+      if (e.target.files && e.target.files[0]) {
+        var fr = new window.FileReader()
+        fr.addEventListener('load', (x) => {
+          this.currentContact.picture = x.target.result
+        })
+        fr.readAsDataURL(files[0])
+      }
+    },
+    updateContact () {
+      if (this.$refs.contactForm.validate()) {
+        for (let index = 0; index < this.currentContact.email.length; index++) {
+          const element = this.currentContact.email[index]
+          if (!element.email) {
+            this.currentContact.email.splice(index, 1)
+          }
+        }
+        for (let index = 0; index < this.currentContact.phone_numbers.length; index++) {
+          const element = this.currentContact.phone_numbers[index]
+          if (!element.number) {
+            this.currentContact.phone_numbers.splice(index, 1)
+          }
+        }
+        for (let index = 0; index < this.currentContact.addresses.length; index++) {
+          const element = this.currentContact.addresses[index]
+          if (!element.street_name) {
+            this.currentContact.addresses.splice(index, 1)
+          }
+        }
+        this.createContact(this.currentContact)
+        this.edit = false
+        this.$emit('update')
+      }
     },
     cancelUpdate () {
       this.currentContact = cloneDeep(this.contact)
       this.edit = false
+      this.$refs.contactForm.resetValidation()
       this.$emit('cancel')
     },
     addPhoneNumber () {
@@ -79,7 +109,7 @@ export default {
       // TODO show dialog "are you sure"
       this.currentContact.phone_numbers.splice(index, 1)
     },
-    addPhoneAddress () {
+    addAddress () {
       // TODO verify last phoneNumber
       this.currentContact.addresses.push({})
     },
@@ -87,13 +117,17 @@ export default {
       // TODO show dialog "are you sure"
       this.currentContact.addresses.splice(index, 1)
     },
-    addPhoneEmail () {
+    addEmail () {
       // TODO verify last phoneNumber
       this.currentContact.email.push({})
     },
     removeEmail (index) {
       // TODO show dialog "are you sure"
       this.currentContact.email.splice(index, 1)
+    },
+    deleteThisContact () {
+      this.deleteContact(this.currentContact.id)
+      this.$emit('delete', this.currentContact.id)
     }
   },
   watch: {
