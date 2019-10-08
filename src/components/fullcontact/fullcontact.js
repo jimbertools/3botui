@@ -102,7 +102,6 @@ export default {
       this.$emit('cancel')
     },
     addPhoneNumber () {
-      // TODO verify last phoneNumber
       this.currentContact.phone_numbers.push({})
     },
     removeNumber (index) {
@@ -110,7 +109,6 @@ export default {
       this.currentContact.phone_numbers.splice(index, 1)
     },
     addAddress () {
-      // TODO verify last phoneNumber
       this.currentContact.addresses.push({})
     },
     removeAddress (index) {
@@ -118,7 +116,6 @@ export default {
       this.currentContact.addresses.splice(index, 1)
     },
     addEmail () {
-      // TODO verify last phoneNumber
       this.currentContact.email.push({})
     },
     removeEmail (index) {
@@ -126,8 +123,9 @@ export default {
       this.currentContact.email.splice(index, 1)
     },
     deleteThisContact () {
+      // TODO show dialog "are you sure"
       this.deleteContact(this.currentContact.id)
-      this.$emit('delete', this.currentContact.id)
+      this.$emit('delete:contact', this.currentContact.id)
     }
   },
   watch: {
