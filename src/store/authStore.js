@@ -35,6 +35,7 @@ export default ({
       var username = responseUrl.searchParams.get('username')
       var signedHash = responseUrl.searchParams.get('signedhash')
 
+
       if (responseUrl.searchParams.get('error')) {
         // context.commit('setFatalError', responseUrl.searchParams.get('error'))
       } else {

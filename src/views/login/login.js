@@ -14,7 +14,7 @@ export default {
       'account'
     ]),
     isLoggingIn () {
-      return !!window.location.search
+      return !!this.$route.query.username
     }
   },
   mounted () {
@@ -33,7 +33,13 @@ export default {
   watch: {
     account (val) {
       if (val) {
-        this.$router.push({ name: 'home' })
+        let to = localStorage.getItem('loginRedirectUrl')
+        if (to && to !== 'null' && to !== 'undefined') {
+          localStorage.removeItem('loginRedirectUrl')
+          window.location.href = to
+        } else {
+          this.$router.push({ name: 'home' })
+        }
       }
     },
     loginUrl (val) {
