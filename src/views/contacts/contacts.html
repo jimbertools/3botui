@@ -36,7 +36,7 @@
             <v-divider vertical></v-divider>
           </v-flex>
           <v-flex md8>
-            <full-contact :key="openContact.id" :contact="openContact" v-if="openContact" />
+            <full-contact :key="openContact.id" :contact="openContact" v-if="openContact" @delete:contact="deleteContact" />
           </v-flex>
         </v-row>
       </v-card>
@@ -44,8 +44,7 @@
   </v-row>
   <v-dialog v-model="addContactDialog" max-width="900px" @click:outside="clearAndClose">
     <v-card>
-      <full-contact :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose" @delete="openContact=null">
-      </full-contact>
+      <full-contact :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose"/>
     </v-card>
   </v-dialog>
   <v-btn fixed app bottom right fab dark color="secondary" @click="addContactDialog = true" style="z-index: 99">
