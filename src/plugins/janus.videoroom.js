@@ -159,7 +159,7 @@ class JimberJanusVideoRoom {
       debug: 'all',
       callback: function () {
         instance.janus = new Janus({
-          server: config.janus,
+          server: config.janusHTTPS,
           success: function () {
             // console.log('janus success')
 
