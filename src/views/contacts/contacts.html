@@ -22,7 +22,7 @@
             </v-toolbar>
             <div class="pa-0" style="position: relative; width: 100%; height: 100%; overflow: auto; min-height: 100px;">
               <div style="position: absolute; height:100%; width: 100%;" class="pa-3">
-                <v-list two-line>
+                <v-list two-line class="pl-3">
                   <v-list-item-group>
                     <template v-for="(contact, index) in contacts">
                       <contact-list-item :contact="contact" :key="index" @click="openContact = contact" />
@@ -44,7 +44,7 @@
   </v-row>
   <v-dialog v-model="addContactDialog" max-width="900px" @click:outside="clearAndClose">
     <v-card>
-      <full-contact :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose">
+      <full-contact :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose" @delete="openContact=null">
       </full-contact>
     </v-card>
   </v-dialog>
