@@ -15,6 +15,7 @@ export default {
       openMail: null,
       selected: [],
       extraInputOptions: true,
+      currentBox: 'Inbox',
       sortingSelection: [
         'Date',
         'From',
@@ -31,7 +32,12 @@ export default {
   computed: {
     ...mapGetters([
       'mails'
-    ])
+    ]),
+    filterMailbox: function () {
+      return this.mails.filter((m) => {
+        return m.folder === this.currentBox
+      })
+    }
   },
   mounted () {
     this.getMails()
@@ -46,9 +52,22 @@ export default {
     },
     sendMailBtn () {
       this.sendMail(this.currentMail)
+      this.clearNewMail()
     },
     removeMail () {
       this.openMail = null
+    },
+    clearNewMail () {
+      this.showCreateMail = false
+      this.currentMail = {
+        From: '',
+        To: '',
+        subject: '',
+        body: ''
+      }
+    },
+    selectMailBox (box) {
+      this.currentBox = box.name
     }
   }
 }
