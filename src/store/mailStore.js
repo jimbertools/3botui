@@ -16,7 +16,6 @@ export default ({
       })
     },
     sendMail: (context, mail) => {
-      console.log(mail)
       mailService.sendMail(mail).then((response) => {
         context.dispatch('getMails')
       }).catch((error) => {

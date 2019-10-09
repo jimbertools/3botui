@@ -35,7 +35,7 @@ export default {
     ]),
     filterMailbox: function () {
       return this.mails.filter((m) => {
-        return m.folder === this.currentBox
+        return m.folder.toLowerCase() === this.currentBox.toLowerCase()
       })
     }
   },
