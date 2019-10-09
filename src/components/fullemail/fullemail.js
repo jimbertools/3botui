@@ -1,5 +1,4 @@
 import moment from 'moment'
-import mailService from '../../services/mailService'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
