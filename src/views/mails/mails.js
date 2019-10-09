@@ -39,14 +39,17 @@ export default {
   methods: {
     ...mapActions([
       'getMails',
-      'sendMail'
+      'sendMail',
+      'deleteMail'
     ]),
     openTheMail (mail) {
       this.openMail = mail
     },
     sendMailBtn () {
-      console.log('Hi there')
       this.sendMail(this.currentMail)
+    },
+    removeMail () {
+      this.openMail = null
     }
   }
 }

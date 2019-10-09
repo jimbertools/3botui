@@ -22,14 +22,14 @@ export default ({
       }).catch((error) => {
         console.error(error)
       })
-    }/*,
-    deleteContact: (context, contactId) => {
-      contactService.deleteContact(contactId).then((response) => {
-        context.dispatch('getContacts')
+    },
+    deleteMail: (context, mailId) => {
+      mailService.deleteMail(mailId).then((response) => {
+        context.dispatch('getMails')
       }).catch((error) => {
         console.error(error)
       })
-    },
+    }/*,
     createContact: (context, contact) => {
       contactService.updateOrCreate(contact).then((response) => {
         context.dispatch('getContacts')
