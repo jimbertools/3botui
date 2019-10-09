@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export default {
   name: 'emaillistitem',
   components: {},
@@ -13,6 +15,9 @@ export default {
       var div = document.createElement('div')
       div.innerHTML = html
       return div.textContent || div.innerText || ''
+    },
+    emailDate() {
+      return moment(moment.unix(this.email.date)).from(moment());
     }
   },
   mounted () {
