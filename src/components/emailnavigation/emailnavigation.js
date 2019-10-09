@@ -20,6 +20,8 @@ export default {
 
   },
   methods: {
-
+    setSelectedBox (box) {
+      this.$emit('selectMailBox', box)
+    }
   }
 }

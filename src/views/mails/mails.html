@@ -3,14 +3,14 @@
   </v-toolbar> -->
   <v-row class="pa-2 fill-height">
     <v-flex md2>
-      <email-navigation @click:create="showCreateMail = true; showBodyOfCreateMail = true"/>
+      <email-navigation @click:create="showCreateMail = true; showBodyOfCreateMail = true" @selectMailBox="selectMailBox"/>
     </v-flex>
     <v-flex md10 class="px-4">
       <v-card class="fill-height">
           <v-row class="fill-height">
             <v-flex md4 class="right-border">
               <v-toolbar class="primary" dark>
-                <v-row class="mx-4 pt-5" v-if="!selected.length">
+                <v-row class="mx-4 pt-5" v-if="!selected || !selected.length">
                   <v-flex md4>
                     <v-select value="Date" dense :items="sortingSelection"></v-select>
                     <!-- <v-checkbox></v-checkbox> -->
@@ -46,7 +46,7 @@
                 <div style="position: absolute; height:100%; width: 100%;" class="pa-3">
                   <v-list three-line>
                     <v-list-item-group v-model="selected">
-                      <template v-for="(email, index) in mails">
+                      <template v-for="(email, index) in filterMailbox">
                         <email-list-item :email="email" :key="index" @click="openMail = email" />
                         <v-divider></v-divider>
                       </template>
@@ -93,7 +93,7 @@
           <v-icon small>fas fa-font</v-icon>
         </v-btn> -->
         <v-spacer></v-spacer>
-        <v-btn icon text>
+        <v-btn icon text @click="clearNewMail">
           <v-icon small>fas fa-trash</v-icon>
         </v-btn>
       </v-row>
