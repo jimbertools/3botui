@@ -17,12 +17,5 @@ export default ({
         mail
       }
     }, headers)
-  }/*,
-  deleteContact (id) {
-    return Axios.post(`${config.jsApiUrl}mail/remove`, {
-      args: {
-        contact_id: id
-      }
-    }, headers)
-  }*/
+  }
 })
