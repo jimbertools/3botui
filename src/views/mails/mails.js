@@ -46,6 +46,9 @@ export default {
     },
     sendMailBtn () {
       this.sendMail(this.currentMail)
+    },
+    removeMail () {
+      this.openMail = null
     }
   }
 }

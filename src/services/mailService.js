@@ -11,10 +11,16 @@ export default ({
     mail.attachments = []
     mail.headers = ''
     mail = JSON.stringify(mail)
-    console.log(mail)
     return Axios.post(`${config.jsApiUrl}mail/send`, {
       args: {
         mail
+      }
+    }, headers)
+  },
+  deleteMail (id) {
+    return Axios.post(`${config.jsApiUrl}mail/delete`, {
+      args: {
+        mail_id: id
       }
     }, headers)
   }

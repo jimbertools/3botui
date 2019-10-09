@@ -22,6 +22,13 @@ export default ({
       }).catch((error) => {
         console.error(error)
       })
+    },
+    deleteMail: (context, mailId) => {
+      mailService.deleteMail(mailId).then((response) => {
+        context.dispatch('getMails')
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   },
   mutations: {

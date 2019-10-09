@@ -58,7 +58,7 @@
               <v-divider vertical></v-divider>
             </v-flex>
             <v-flex md8>
-              <full-email class="pl-2" :email="openMail" v-if="openMail" />
+              <full-email class="pl-2" :email="openMail" v-if="openMail" @removed="removeMail"/>
             </v-flex>
           </v-row>
       </v-card>
