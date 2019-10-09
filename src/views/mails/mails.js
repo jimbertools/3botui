@@ -45,7 +45,6 @@ export default {
       this.openMail = mail
     },
     sendMailBtn () {
-      console.log('Hi there')
       this.sendMail(this.currentMail)
     }
   }
