@@ -29,6 +29,9 @@ export default {
       'getContacts',
       'createContact'
     ]),
+    deleteContact (contactId) {
+      this.openContact = null
+    },
     clearAndClose () {
       this.newContact = {}
       this.addContactDialog = false
