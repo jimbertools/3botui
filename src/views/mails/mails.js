@@ -15,7 +15,7 @@ export default {
       openMail: null,
       selected: [],
       extraInputOptions: true,
-      currentBox: 'inbox',
+      currentBox: 'Inbox',
       sortingSelection: [
         'Date',
         'From',
