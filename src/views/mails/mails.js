@@ -1,11 +1,12 @@
 import emailNavigation from '../../components/emailnavigation'
 import fullEmail from '../../components/fullemail'
 import emailListItem from '../../components/emaillistitem'
-import richInput from '../../components/richinput'
 import { mapGetters, mapActions } from 'vuex'
+import { VueEditor } from 'vue2-editor'
+
 export default {
   name: 'mails',
-  components: { emailNavigation, fullEmail, emailListItem, richInput },
+  components: { VueEditor, emailNavigation, fullEmail, emailListItem },
   props: [],
   data () {
     return {
@@ -20,9 +21,10 @@ export default {
         'Subject'
       ],
       currentMail: {
-        to:"",
-        subject:"",
-        body:"",
+        From: '',
+        To: '',
+        subject: '',
+        body: ''
       }
     }
   },
@@ -37,10 +39,14 @@ export default {
   methods: {
     ...mapActions([
       'getMails',
-      "sendMail"
+      'sendMail'
     ]),
     openTheMail (mail) {
       this.openMail = mail
+    },
+    sendMailBtn () {
+      console.log('Hi there')
+      this.sendMail(this.currentMail)
     }
   }
 }

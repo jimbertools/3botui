@@ -7,15 +7,16 @@ export default ({
   actions: {
     getMails: (context) => {
       mailService.getMails().then((response) => {
-        response.data.sort(function(a,b){
-          return new Date(b.date) - new Date(a.date);
+        response.data.sort(function (a, b) {
+          return new Date(b.date) - new Date(a.date)
         })
         context.commit('setMails', response.data)
       }).catch((error) => {
         console.error(error)
       })
     },
-    sendMail: (mail, contact) => {
+    sendMail: (context, mail) => {
+      console.log(mail)
       mailService.sendMail(mail).then((response) => {
         context.dispatch('getMails')
       }).catch((error) => {

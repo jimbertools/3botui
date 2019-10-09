@@ -76,12 +76,13 @@
       </v-btn>
     </v-card-title>
     <v-card-text class="pb-0" v-if="showBodyOfCreateMail">
-      <v-text-field label="To" required></v-text-field>
-      <v-text-field label="Subject" required></v-text-field>
+        <v-text-field label="From" v-model="currentMail.From" required></v-text-field>
+      <v-text-field label="To" v-model="currentMail.To" required></v-text-field>
+      <v-text-field label="Subject" v-model="currentMail.subject" required></v-text-field>
       <v-divider></v-divider>
-      <rich-input :fullToolbar="extraInputOptions"/>
+      <vue-editor v-model="currentMail.body"/>
       <v-row class="py-2 px-3">
-        <v-btn color="secondary" @click="sendMail">
+        <v-btn color="secondary" @click="sendMailBtn">
           <v-icon left small>fas fa-paper-plane</v-icon>
           Send
         </v-btn>
