@@ -28,7 +28,6 @@ export default {
     ]),
     deleteMailBtn () {
       this.deleteMail(this.email.id)
-      console.log("tada")
       this.$emit('removed')
     }
   }

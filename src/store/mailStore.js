@@ -29,14 +29,7 @@ export default ({
       }).catch((error) => {
         console.error(error)
       })
-    }/*,
-    createContact: (context, contact) => {
-      contactService.updateOrCreate(contact).then((response) => {
-        context.dispatch('getContacts')
-      }).catch((error) => {
-        console.error(error)
-      })
-    }*/
+    }
   },
   mutations: {
     setMails: (state, mails) => {
