@@ -39,8 +39,7 @@ export default {
   methods: {
     ...mapActions([
       'getMails',
-      'sendMail',
-      'deleteMail'
+      'sendMail'
     ]),
     openTheMail (mail) {
       this.openMail = mail
