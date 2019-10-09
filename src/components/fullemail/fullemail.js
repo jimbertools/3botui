@@ -25,7 +25,7 @@ export default {
     ...mapActions([
       'deleteMail'
     ]),
-    deleteMailBtn () {
+    deleteThisMail () {
       this.deleteMail(this.email.id)
       this.$emit('removed')
     }
