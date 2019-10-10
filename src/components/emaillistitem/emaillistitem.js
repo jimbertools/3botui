@@ -34,8 +34,6 @@ export default {
       'updatePriority'
     ]),
     moveMail (folder) {
-      console.log(this.email.id)
-      console.log(folder)
       this.updateFolder({
         mailId: this.email.id,
         folder: folder

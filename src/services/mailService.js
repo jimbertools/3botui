@@ -35,8 +35,6 @@ export default ({
     })
   },
   updatePriority (id, priority) {
-    console.log("mailservice.js")
-    console.log(priority)
     return Axios.post(`${config.jsApiUrl}mail/update_priority`, {
       args: {
         mail_id: id,
