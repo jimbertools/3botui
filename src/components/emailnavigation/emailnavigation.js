@@ -6,6 +6,7 @@ export default {
   props: [],
   data () {
     return {
+      selectedBox: 0
     }
   },
   computed: {
