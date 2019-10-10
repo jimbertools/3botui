@@ -2,7 +2,14 @@ import mailService from '../services/mailService'
 
 export default ({
   state: {
-    mails: []
+    mails: [],
+    boxes: [
+      { name: 'Inbox' },
+      { name: 'Outbox' },
+      { name: 'Sent' },
+      { name: 'Spam' },
+      { name: 'Trash' }
+    ]
   },
   actions: {
     getMails: (context) => {
@@ -28,6 +35,13 @@ export default ({
       }).catch((error) => {
         console.error(error)
       })
+    },
+    updateFolder: (context, mailId, folder) => {
+      mailService.updateFolder(mailId, folder).then((response) => {
+        context.dispatch('getMails')
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   },
   mutations: {
@@ -36,6 +50,7 @@ export default ({
     }
   },
   getters: {
-    mails: (state) => state.mails
+    mails: (state) => state.mails,
+    boxes: (state) => state.boxes
   }
 })

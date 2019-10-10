@@ -1,21 +1,18 @@
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'emailnavigation',
   components: {},
   props: [],
   data () {
     return {
-      selectedBox: 0,
-      boxes: [
-        { name: 'Inbox' },
-        { name: 'Outbox' },
-        { name: 'Sent' },
-        { name: 'Spam' },
-        { name: 'Trash' }
-      ]
+      selectedBox: 0
     }
   },
   computed: {
-
+    ...mapGetters([
+      'boxes'
+    ])
   },
   mounted () {
 

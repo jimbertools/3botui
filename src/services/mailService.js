@@ -25,5 +25,13 @@ export default ({
         mail_id: id
       }
     }, headers)
+  },
+  updateFolder (id, folder) {
+    return Axios.post(`${config.jsApiUrl}mail/update_folder`, {
+      args: {
+        mail_id: id,
+        folder_name: folder
+      }
+    })
   }
 })
