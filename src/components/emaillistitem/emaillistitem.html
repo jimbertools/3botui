@@ -1,5 +1,5 @@
 <section class="emaillistitem">
-  <v-list-item @click="$emit('click')">
+  <v-list-item @click="$emit('click')"  @contextmenu.prevent="$refs.menu.open">
     <template v-slot:default="{ active, toggle }">
       <v-list-item-content>
         <v-list-item-title>{{email.from_email}}</v-list-item-title>
@@ -22,4 +22,11 @@
       </v-list-item-action>
     </template>
   </v-list-item>
+  <vue-context ref="menu">
+      <v-list three-line>
+        <v-list-item v-for="(box, key) in boxes" :key=key>
+            <v-list-item-title @click=moveMail(email.id,box.name)>Move to {{box.name}}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </vue-context>
 </section>
