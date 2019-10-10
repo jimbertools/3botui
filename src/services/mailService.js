@@ -1,6 +1,8 @@
 import Axios from 'axios'
 import config from '../../public/config'
 import moment from 'moment'
+import { resolve } from 'url'
+import { reject } from 'q'
 const headers = { headers: { 'Content-Type': 'application/json' } }
 export default ({
   getMails () {

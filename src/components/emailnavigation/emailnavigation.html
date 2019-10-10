@@ -7,8 +7,9 @@
       Create
     </v-btn>
   </div>
-  <v-navigation-drawer permanent class="transparent elevation-0">
+  <v-navigation-drawer permanent class="transparent elevation-0 pl-3">
     <v-list dense class="pl-2">
+      <v-list-item-group v-model="selectedBox" color="primary">
       <v-list-item link v-for="(box, index) in boxes" :key="index" @click="setSelectedBox(box)">
         <v-list-item-icon>
           <v-icon small>fas fa-inbox</v-icon>
@@ -17,6 +18,7 @@
           <v-list-item-title>{{box.name}}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+      </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
 </section>

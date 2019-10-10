@@ -4,6 +4,7 @@ export default {
   props: [],
   data () {
     return {
+      selectedBox: 0,
       boxes: [
         { name: 'Inbox' },
         { name: 'Outbox' },
