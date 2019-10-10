@@ -47,8 +47,8 @@
                   <v-list three-line>
                     <v-list-item-group v-model="selected">
                       <template v-for="(email, index) in filterMailbox">
-                        <email-list-item :email="email" :key="index" @click="openMail = email" />
-                        <v-divider></v-divider>
+                        <email-list-item class="ml-3" :email="email" :key="index" @click="openMail = email" />
+                        <v-divider class="ml-3"/>
                       </template>
                     </v-list-item-group>
                   </v-list>
