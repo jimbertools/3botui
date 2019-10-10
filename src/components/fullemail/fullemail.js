@@ -28,6 +28,12 @@ export default {
     deleteThisMail () {
       this.deleteMail(this.email.id)
       this.$emit('removed')
+    },
+    replyToMail () {
+      this.$emit('replyToMail', this.email)
+    },
+    forwardMail () {
+      this.$emit('forwardMail', this.email)
     }
   }
 }
