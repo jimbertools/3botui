@@ -36,9 +36,15 @@ export default ({
         console.error(error)
       })
     },
-    updateFolder: (context, mailId, folder) => {
-      mailService.updateFolder(mailId, folder).then((response) => {
+    updateFolder: (context, data) => {
+      mailService.updateFolder(data.mailId, data.folder).then((response) => {
         context.dispatch('getMails')
+      }).catch((error) => {
+        console.error(error)
+      })
+    },
+    updatePriority: (context, data) => {
+      mailService.updatePriority(data.mailId, data.priority).then((response) => {
       }).catch((error) => {
         console.error(error)
       })
