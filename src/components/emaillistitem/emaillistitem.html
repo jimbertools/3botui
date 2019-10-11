@@ -1,4 +1,5 @@
 <section class="emaillistitem">
+  <drag :transfer-data="{emailId: email.id}" >
   <v-list-item @click="$emit('click')"  @contextmenu.prevent="$refs.menu.open">
     <template v-slot:default="{ active, toggle }">
       <v-row align="center">
@@ -28,6 +29,8 @@
       </v-row>
     </template>
   </v-list-item>
+</drag>
+
   <vue-context ref="menu">
       <v-list three-line>
         <v-list-item v-for="(box, key) in boxes" :key=key>
