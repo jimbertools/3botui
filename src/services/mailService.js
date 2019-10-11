@@ -33,5 +33,13 @@ export default ({
         folder_name: folder
       }
     })
+  },
+  updatePriority (id, priority) {
+    return Axios.post(`${config.jsApiUrl}mail/update_priority`, {
+      args: {
+        mail_id: id,
+        priority: priority
+      }
+    })
   }
 })

@@ -30,10 +30,21 @@ export default {
   },
   methods: {
     ...mapActions([
-      'updateFolder'
+      'updateFolder',
+      'updatePriority'
     ]),
-    moveMail (id, folder) {
-      this.updateFolder(id, folder)
+    moveMail (folder) {
+      this.updateFolder({
+        mailId: this.email.id,
+        folder: folder
+      })
+    },
+    changePriority () {
+      this.updatePriority({
+        mailId: this.email.id,
+        priority: !this.email.priority
+      })
+      this.email.priority = !this.email.priority
     }
   }
 }
