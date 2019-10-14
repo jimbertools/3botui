@@ -1,11 +1,10 @@
 import moment from 'moment'
 import { VueContext } from 'vue-context'
 import { mapActions, mapGetters } from 'vuex'
-import { Drag, Drop } from 'vue-drag-drop'
 
 export default {
   name: 'emaillistitem',
-  components: { VueContext, Drag, Drop },
+  components: { VueContext },
   props: ['email'],
   data () {
     return {

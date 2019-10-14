@@ -14,7 +14,6 @@ export default {
     ...mapGetters([
       'boxes'
     ])
-    
   },
   mounted () {
 

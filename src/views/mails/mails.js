@@ -5,9 +5,11 @@ import { mapGetters, mapActions } from 'vuex'
 import { VueEditor } from 'vue2-editor'
 import { timingSafeEqual } from 'crypto'
 
+import { Drag, Drop } from 'vue-drag-drop'
+
 export default {
   name: 'mails',
-  components: { VueEditor, emailNavigation, fullEmail, emailListItem },
+  components: { VueEditor, emailNavigation, fullEmail, emailListItem, Drag, Drop },
   props: [],
   data () {
     return {
