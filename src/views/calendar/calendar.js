@@ -1,10 +1,14 @@
+import fullEvent from '../../components/fullevent'
+
 export default {
   name: 'calendar',
-  components: {},
+  components: { fullEvent },
   props: [],
   data () {
     return {
       today: '2019-01-08',
+      openEvent: {},
+      addEventDialog: false,
       events: [
         {
           name: 'Weekly Meeting',
@@ -19,11 +23,7 @@ export default {
           name: 'Mash Potatoes',
           start: '2019-01-09 12:30',
           end: '2019-01-09 15:30'
-        },
-//         {
-//           name: '<img src="x" onerror=alert()>',
-//           start: '2019-01-10'
-//         }
+        }
       ]
     }
   },
@@ -34,6 +34,9 @@ export default {
     this.$refs.calendar.scrollToTime('08:00')
   },
   methods: {
-
+    clearAndClose () {
+      this.newEvent = {}
+      this.addEventDialog = false
+    }
   }
 }

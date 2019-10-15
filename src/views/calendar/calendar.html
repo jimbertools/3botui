@@ -24,4 +24,12 @@
       </v-card-text>
     </v-card>
   </v-col>
+  <v-dialog v-model="addEventDialog" max-width="900px" @click:outside="clearAndClose">
+      <v-card>
+        <full-event :key="Math.random()" editable @update="clearAndClose" @cancel="clearAndClose"/>
+      </v-card>
+    </v-dialog>
+    <v-btn fixed app bottom right fab dark color="secondary" @click="addEventDialog = true" style="z-index: 99">
+      <v-icon>fas fa-plus</v-icon>
+    </v-btn>
 </section>
