@@ -5,6 +5,7 @@ import contactStore from './contactStore'
 import ffcStore from './ffcStore'
 import authStore from './authStore'
 import mailStore from './mailStore'
+import calendarStore from './calendarStore'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     contactStore,
     ffcStore,
     authStore,
-    mailStore
+    mailStore,
+    calendarStore
   }
 })
