@@ -33,7 +33,7 @@
   </v-row>
   <v-dialog v-model="addEventDialog" max-width="900px" @click:outside="clearAndClose">
       <v-card>
-        <full-event :selectedCalendarId="selectedCalendarId" :calendars="calendars" editable @update="clearAndClose" @cancel="clearAndClose"/>
+        <full-event :selectedCalendarId="selectedCalendarId" :calendars="calendars" editable @update="clearAndClose" @cancel="clearAndClose" :key="Math.random()"/>
       </v-card>
     </v-dialog>
     <v-btn v-if="(calendars.length > 0)" fixed app bottom right fab dark color="secondary" @click="addEventDialog = true" style="z-index: 99">

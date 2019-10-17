@@ -10,6 +10,7 @@ export default {
     return {
       edit: true,
       currentEvent: {
+        selectedCalendarId: this.selectedCalendarId
       }
     }
   },
