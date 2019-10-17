@@ -1,39 +1,45 @@
+import fullEvent from '../../components/fullevent'
+import calendarNavigation from '../../components/calendarnavigation'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'calendar',
-  components: {},
+  components: { fullEvent, calendarNavigation },
   props: [],
   data () {
     return {
-      today: '2019-01-08',
-      events: [
-        {
-          name: 'Weekly Meeting',
-          start: '2019-01-07 09:00',
-          end: '2019-01-07 10:00'
-        },
-        {
-          name: 'Thomas\' Birthday',
-          start: '2019-01-10'
-        },
-        {
-          name: 'Mash Potatoes',
-          start: '2019-01-09 12:30',
-          end: '2019-01-09 15:30'
-        },
-//         {
-//           name: '<img src="x" onerror=alert()>',
-//           start: '2019-01-10'
-//         }
-      ]
+      today: '2019-10-16',
+      openEvent: {},
+      addEventDialog: false,
+      selectedCalendarId: ''
     }
   },
   computed: {
-
+    ...mapGetters([
+      'calendars',
+      'events'
+    ])
   },
   mounted () {
     this.$refs.calendar.scrollToTime('08:00')
+    this.getCalendars()
   },
   methods: {
-
+    ...mapActions([
+      'getCalendars',
+      'setEvents',
+      'getFullEvents'
+    ]),
+    clearAndClose () {
+      this.newEvent = {}
+      this.addEventDialog = false
+    },
+    setSelectedCalendar (calendarId) {
+      this.selectedCalendarId = calendarId
+      let eventIds = this.calendars.find(x => x.id === calendarId).events
+      this.getFullEvents({
+        calendarId: this.selectedCalendarId,
+        eventIds: eventIds
+      })
+    }
   }
 }

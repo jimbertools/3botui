@@ -1,0 +1,29 @@
+<section class="calendarnavigation">
+  <v-navigation-drawer permanent class="transparent elevation-0 pl-3">
+    <v-list dense class="pl-2">
+      <v-list-item-group v-model="selectedBox" color="primary">
+      <v-list-item link v-for="(calendar, index) in calendars" :key="index" @click="setSelectedCalendar(calendar.id)">
+        <v-list-item-icon>
+          <v-icon small>fad fa-calendar-alt</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>{{calendar.name}}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      </v-list-item-group>
+    </v-list>
+  </v-navigation-drawer>
+
+  <v-col>
+  <v-row align="center" class="ml-0">
+    <v-flex>
+      <v-text-field v-model="newCalendar" label="Calendar name" class="pl-3">
+      </v-text-field>
+    </v-flex>
+    <v-flex>
+      <v-btn small color="success" @click="addCal">add</v-btn>
+    </v-flex>
+  </v-row>
+</v-col>
+
+</section>
