@@ -21,7 +21,7 @@ export default {
       return div.textContent || div.innerText || ''
     },
     emailDate () {
-      return moment(moment.unix(this.email.date)).from(moment())
+      return moment(moment.unix(this.email.mtime)).from(moment())
     }
   },
   mounted () {

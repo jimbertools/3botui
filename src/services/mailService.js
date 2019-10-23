@@ -9,10 +9,7 @@ export default ({
     return Axios.post(`${config.jsApiUrl}mail/list`)
   },
   sendMail (mail) {
-    mail.date = moment(moment.utc()).format('MM/DD/YYYY HH:mm')
     mail.attachments = []
-    mail.headers = ''
-    mail = JSON.stringify(mail)
     return Axios.post(`${config.jsApiUrl}mail/send`, {
       args: {
         mail
