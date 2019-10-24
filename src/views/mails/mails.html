@@ -47,7 +47,13 @@
                   <v-list three-line>
                     <v-list-item-group v-model="selected">
                       <template v-for="(email, index) in filterMailbox">
-                        <email-list-item class="ml-3" :email="email" :key="index" @click="openMail = email" />
+                          <drag :transfer-data="{emailId: email.id}">
+                              <template slot="image" >
+                                  <email-list-item class="ml-3 grey" :email="email" :key="index" @click="openMail = email" />
+                              </template>
+                              <email-list-item class="ml-3" :email="email" :key="index" @click="openMail = email" />
+                          </drag>
+                        
                         <v-divider class="ml-3"/>
                       </template>
                     </v-list-item-group>

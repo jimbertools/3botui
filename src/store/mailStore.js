@@ -4,11 +4,11 @@ export default ({
   state: {
     mails: [],
     boxes: [
-      { name: 'Inbox' },
-      { name: 'Outbox' },
-      { name: 'Sent' },
-      { name: 'Spam' },
-      { name: 'Trash' }
+      { name: 'Inbox', icon: 'fas fa-envelope-open-text' },
+      { name: 'Outbox', icon: 'far fa-paper-plane' },
+      { name: 'Sent', icon: 'fas fa-paper-plane' },
+      { name: 'Spam', icon: 'far fa-times-circle' },
+      { name: 'Trash', icon: 'fas fa-trash' }
     ]
   },
   actions: {
