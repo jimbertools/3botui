@@ -15,8 +15,6 @@ export default ({
       context.commit('setAccount', null)
     },
     async generateLoginUrl (context) {
-      // console.log("in generateLoginUrl")
-      // return
       context.dispatch('clearStorage')
       var state = ''
       var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
