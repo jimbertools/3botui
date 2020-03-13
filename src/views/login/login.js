@@ -11,10 +11,15 @@ export default {
   computed: {
     ...mapGetters([
       'loginUrl',
-      'account'
-    ]),
-    isLoggingIn () {
-      return !!this.$route.query.username
+       'account'
+  ]),
+    isLoggingIn() {
+      try {
+        const signedAttempt = JSON.parse(this.$route.query.signedAttempt);
+        return signedAttempt.doubleName;
+      } catch (err) {
+        return false
+      }
     }
   },
   mounted () {
@@ -26,10 +31,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      'generateLoginUrl',
+      'generateLoginUrl', 
       'checkResponse'
     ])
-  },
+    },
   watch: {
     account (val) {
       if (val) {
