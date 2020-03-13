@@ -2,6 +2,7 @@
 import botService from '../services/3botService'
 import config from '../../public/config'
 import cryptoService from '../services/cryptoService'
+import router from '../router'
 
 export default ({
   state: {
@@ -42,16 +43,26 @@ export default ({
       console.log(username)
       console.log(signedHash)
       if (responseUrl.searchParams.get('error')) {
+        console.log("something went wrong, error found in searchparams")
         // context.commit('setFatalError', responseUrl.searchParams.get('error'))
       } else {
-        botService.getUserData(username).then(async (response) => {
-          if (signedHash && context.getters.state !== await cryptoService.validateSignature(signedHash, response.data.publicKey)) {
-            // context.commit('setFatalError', 'Invalid state.')
-          } else {
-            context.commit('setAccount', username)
-            window.localStorage.setItem('username', username)
-          }
-        })
+        // botService.getUserData(username).then(async (response) => {
+        //   console.log("response from botservice",response)
+        //   if (signedHash && context.getters.state !== await cryptoService.validateSignature(signedHash, response.data.publicKey)) {
+        //     console.log("fatal error in checking")
+        //     context.commit('setAccount', username)
+        //     window.localStorage.setItem('username', username)
+        //   } else {
+        //     context.commit('setAccount', username)
+        //     window.localStorage.setItem('username', username)
+        //     this.$router.push({ name: 'home' })
+
+        //   }
+        // })
+        context.commit('setAccount', username)
+        window.localStorage.setItem('username', username)
+        router.push({ name: 'home' })
+
         // .catch(e => context.commit('setFatalError', 'Signature failed, please try again.'))
       }
     },
